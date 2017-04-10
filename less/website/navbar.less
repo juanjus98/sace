@@ -1,0 +1,113 @@
+	.navbar-wa {
+		background: @color-primary-0;
+		border: solid 3px @color-primary-2;
+		border-radius: 0px;
+		border-left: none;
+		border-right: none;
+		margin-bottom: 15px;
+
+		.navbar-collapse{
+			padding-right: 0px;
+			padding-left: 0px;
+		}
+
+		.navbar-nav-wa{
+			li {
+				padding: 4px;
+				border-right: 1px solid @color-primary-2;
+				&:first-child {
+					border-left: 1px solid @color-primary-2;
+				}
+
+				.dropdown-menu {
+					padding: 0px 0;
+					border:none;
+					li {
+						width: 100%;
+						border: none;
+						padding: 0px;
+						
+
+						a {
+							font-family: @font-primary;
+							font-size: 18px;
+							font-weight: 700;
+							padding: 14px 24px 16px;
+							text-transform: uppercase;
+							color: #fff;
+							line-height: 15px;
+							transition: background-color 0.5s ease;
+							&:hover {
+								color: #fff;
+								background-color: @color-primary-3;
+							}
+						}
+					}
+
+					.active, .open {
+						a, a:focus, a:hover {
+							color: #fff;
+							background: url(../images/asfalt-dark.png) @color-primary-4;
+						}
+					}
+				}
+
+				a {
+					font-family: @font-primary;
+					font-size: 24px;
+					font-weight: 700;
+					padding: 14px 24px 16px;
+					text-transform: uppercase;
+					color: #fff;
+					line-height: 15px;
+					transition: background-color 0.5s ease;
+					&:hover {
+						color: #fff;
+						background-color: @color-primary-1;
+						background: url(../images/asfalt-dark.png) @color-primary-4;
+					}
+				}
+			}
+
+			.active, .open {
+				a, a:focus, a:hover {
+					color: #fff;
+					background: url(../images/asfalt-dark.png) @color-primary-4;
+				}
+			}
+
+		}
+
+	}
+
+
+	/**
+	 * Botón cotizar
+	 */
+	
+.cont-btn-cotizar {
+	padding: 6px;
+	margin-right: 15px;
+
+	.btn-cotizar {
+		border-radius: 0px;
+		color: #fff;
+		background: @color-tree-0;
+		border: solid 1px lighten(@color-tree-0,15%);
+		padding: 6px 16px;
+		font-size: 18px;
+		font-weight: 600;
+		font-family: Raleway,sans-serif;
+		text-transform: uppercase;
+		transition: background-color 0.5s ease;
+
+		span{
+			font-family: 'Arial';
+			font-weight: 400;
+		}
+		&:hover{
+			background: lighten(@color-tree-0,5%);
+		}
+	}
+
+}

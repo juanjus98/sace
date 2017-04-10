@@ -1,0 +1,46 @@
+.cont_slide_1 ,.cont_slide_2, .cont_slide_3{
+	background: #fff;
+	border: solid 1px @border-color;
+	padding:0;
+}
+
+.cont_slide_1 {
+	.carousel-control {
+		background:transparent;
+
+		.glyphicon-chevron-left, .glyphicon-chevron-right {
+			background-color: rgba(0,0,0,.80);
+		    border: 1px solid rgba(0,0,0,.90);
+		    line-height: 46px;
+		    font-family: FontAwesome;
+		    width: 40px;
+		    height: 46px;
+		    font-size: 22px;
+		}
+
+		.glyphicon-chevron-left{
+			left:10px;
+			&:before {
+				content: "\f053";
+			}
+		}
+
+		.glyphicon-chevron-right{
+			right: 10px;
+			&:before {
+				content: "\f054";
+			}
+		}
+	}
+}
+
+.cont_slide_2{
+	margin-bottom: 15px;
+}
+
+/*Slider clients footer*/
+.content-slider-clientes {
+	li {
+		padding: 0 5px;
+	}
+}

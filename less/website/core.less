@@ -1,0 +1,295 @@
+@import url(//fonts.googleapis.com/css?family=Raleway:400,900,800,700,600,500,300,200,100);
+body{
+	font-family: 'Raleway', sans-serif;
+	font-size: 15px;
+	font-weight: 400;
+	line-height: 1.73333333;
+	color: #2d3134;
+	background: url('../images/bg-novopan-cemento.jpg');
+	-webkit-text-size-adjust: none;
+}
+
+a{
+	text-decoration: none;
+	&:hover{
+		text-decoration: none;
+	}
+}
+
+/**
+ * Form search
+ */
+ .form-search{
+ 	.form-control {
+ 		border-radius:0;
+ 		border-color: @color-primary-1;
+ 	}
+
+ 	.btn-search {
+ 		color: #fff;
+ 		background-color: @color-primary-4;
+ 		border-color: @color-primary-1;
+ 		border-radius:0;
+ 		transition: background-color 0.5s ease;
+ 		&:hover{
+ 			background-color: lighten(@color-primary-4, 10%);
+ 		}
+ 	}
+ }
+
+ .clear-padd-l {
+ 	padding-right: 0px;
+ }
+
+ .clear-padd-r {
+ 	padding-right: 0px;
+ }
+
+ [canvas=container] {
+ 	background:none !important;
+ }
+
+ /**
+  * Slide lo mejor
+  */
+  .cont_slide_lomejor {
+  	/*padding: 8px;*/
+  	margin-top: 15px;
+  	/*background: #fff;
+  	border: solid 1px @border-color;*/
+
+  	.content-slider {
+  		/*li {*/
+
+  			/*.theme-1 {
+  				background: @color-tree-0;
+  				border: solid 1px @color-tree-0;
+  				.caption  {
+  					color:#fff;
+  				}
+  			}*/
+
+
+  			.thumbnail{
+  				width: 373.2px;
+  				margin-bottom: 0px;
+  				padding:0;
+  				border-radius: 0px;
+  				position:relative;
+  				border:none;
+  				/*background-color: transparent;*/
+
+  				.caption{
+  					padding:0px;
+  					position: absolute;
+  					bottom: 0;
+  					width:100%;
+  					/*background: rgba(124,182,118,0.8);*/
+
+  					h3 {
+						margin: 0;
+						padding: 12px 8px;
+						font-size: 34px;
+						font-weight: 900;
+						text-transform: uppercase;
+						text-align:center;
+						/*text-shadow: 1px 1px 1px #999;*/
+  					}
+
+  				}
+
+  				.bg-1 {
+  					background: rgba(124,182,118,0.8);
+
+  					h3 {
+  						color: #fff;
+  					}
+  				}
+
+  				.bg-2 {
+  					background: rgba(179, 41, 68, 0.8);
+
+  					h3 {
+  						color: #fff;
+  					}
+  				}
+
+  				.bg-3 {
+  					background: rgba(254,254,220, 0.8);
+
+  					h3 {
+  						color: @color-primary-0;
+  					}
+  				}
+
+  				/*.cont-buttons {
+  					padding:8px;
+  					background-color: transparent;
+  					background-color: rgba(0,0,0,.25);
+  					box-shadow: 0 10px 20px -12px rgba(0,0,0,.25), 0 3px 20px 0 rgba(0,0,0,.25), 0 8px 10px -5px rgba(0,0,0,.25);
+
+  					.btn-detalles, .btn-cotizar {
+  						border:solid 1px #fff;
+  						color: #fff;
+  						font-size: 12px;
+  						border-radius: 0;
+  						transition: background-color 0.5s ease;
+
+  						&:hover {
+  							background-color: rgba(0,0,0,.25);
+  						}
+  					}
+
+  				}*/
+
+  			}
+  		/*}*/
+  	}
+
+  	.lSAction > .lSPrev {
+  		left: 0px;
+  		&:before{
+  			content: "\f053";
+  		}
+  	}
+
+  	.lSAction > .lSNext {
+  		right: 0px;
+  		&:before{
+  			content: "\f054";
+  		}
+  	}
+
+  	.lSAction > a {
+      background-color: rgba(0,0,0,.25);
+      background-image:none;
+      font-family: FontAwesome;
+      font-size: 20px;
+      color:#000;
+      height: 62px;
+      margin-top: -16px;
+      top: 44%;
+      line-height: 66px;
+      text-align: center;
+  	}
+
+  }
+
+  .titulo-h2 {
+  	background: url(../images/brushed-alum.png) #7CB676;
+    padding: 10px;
+    margin-bottom: 0px;
+    color: #fff;
+    font-size: 26px;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-align: center;
+    text-shadow: 1px 1px 1px #999;
+  }
+
+  .home-description {
+  	margin-top: 15px;
+  	background:#fff;
+  	padding:50px 10px;
+
+  	h1{
+		font-size: 54px;
+		line-height: 1.11111111;
+		letter-spacing: -1px;
+		font-family: 'Raleway', sans-serif;
+		font-weight: 900;
+		margin: 0;
+		text-transform: uppercase;
+		color: @color-primary-0;
+
+		small {
+			font-weight: 300;
+			font-size: inherit;
+			color: @color-primary-0;
+		}
+  	}
+
+  	p {
+	    font-family: 'Raleway', sans-serif;
+	    font-size: 15px;
+	    font-weight: 400;
+	    line-height: 1.73333333;
+	    color: #2d3134;
+      text-align: justify;
+  	}
+
+  }
+
+.cont-principal{
+  h1{
+      padding:16px 0px;
+      margin: 0;
+      font-size: 54px;
+      line-height: 1.11111111;
+      letter-spacing: -1px;
+      font-weight: 900;
+      text-transform: uppercase;
+      color: @color-primary-0;
+      text-shadow: 1px 1px 1px #fff;
+
+      small {
+        font-weight: 300;
+        font-size: inherit;
+        color: @color-primary-0;
+      }
+
+    }
+}
+
+.padding-l-0 {
+  padding-left: 0px
+}
+
+.sin-registros {
+  text-align: center;
+  background: #fff;
+  padding: 30px;
+  margin-bottom:20px;
+
+  font-size: 16px;
+  font-weight: 400;
+
+  i{
+    font-size: 20px;
+    color:@color-primary-0;
+  }
+}
+
+.cont-cotizador{
+  background:#fff;
+  margin-bottom: 30px;
+  padding: 14px;
+
+  h3{
+    margin: 6px 0 0 0;
+    font-size: 22px;
+    font-weight: 700;
+    .gratis{
+      color:@color-primary-0;
+    }
+  }
+}
+
+.btn-form {
+    color: #fff;
+    background: @color-tree-3;
+    border: solid 1px lighten(@color-tree-3,15%);
+    padding: 6px 16px;
+    font-size: 18px;
+    font-weight: 600;
+    font-family: Raleway,sans-serif;
+    transition: background-color 0.5s ease;
+    &:hover{
+      background: lighten(@color-tree-3,5%);
+      color: #fff;
+    }
+  }
+
+  .cont-confirmacion {
+    padding: 50px;
+  }

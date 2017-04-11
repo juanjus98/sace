@@ -1,22 +1,43 @@
 <?php
 class Crud_model extends CI_Model {
 
-   function __construct() {
-       parent::__construct();
-   }
+  function __construct() {
+     parent::__construct();
+  }
 
-   public function set_post($searchterm) {
-       if ($searchterm) {
-           $this->session->set_userdata('s_post', $searchterm);
-           return $searchterm;
-       } elseif ($this->session->userdata('s_post')) {
-           $searchterm = $this->session->userdata('s_post');
-           return $searchterm;
-       } else {
-           $searchterm = "";
-           return $searchterm;
-       }
-   }
+  public function set_post($data,$sessionName) {
+     if ($data) {
+         $this->session->set_userdata($sessionName, $data);
+         return $data;
+     } elseif ($this->session->userdata($sessionName)) {
+         $data = $this->session->userdata($sessionName);
+         return $data;
+     } else {
+         $data = "";
+         return $data;
+     }
+  }
+
+ /**
+ * Trae registros.
+ * Consulta los registro de una tabla.
+ *
+ * @package Crud_model
+ * @license http://www.webapu.com
+ * @copyright webApu.com
+ * @author Juan Julio Sandoval <juanjus98@gmail.com>
+ * @since 2017-01-05
+ * @version 0.1
+ * @param array $data
+ * @return array
+ */
+ function getRows($data) {
+   $result = $this->db->select($data['columns'])
+   ->where($data['where'])
+   ->get($data['table'])
+   ->result_array();
+   return $result;
+}
 
  /**
  * Trae registros de una fila.

@@ -49,8 +49,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'login';
-$route['salir'] = "login/logout";
+$route['default_controller'] = 'waadmin/waauth';
+$route['salir'] = "waadmin/waauth/logout";
 
 //Autenticar
 $route['autenticar'] = "login/autenticar";
@@ -63,4 +63,10 @@ $route['translate_uri_dashes'] = FALSE;
 /*
 * Admin routes
 */
-$route['admin/condominio/(:any)/(:num)'] = "admin/condominios/editar/$1/$2";
+$route['waadmin'] = "waadmin/waauth";
+$route['waadmin/login'] = "waadmin/waauth";
+$route['waadmin/salir'] = "waadmin/waauth/logout";
+$route['waadmin/perfil/(:any)'] = "waadmin/Waauth/perfil";
+
+$route['waadmin/condominio/(:any)/(:num)'] = "waadmin/condominios/editar/$1/$2";
+/*$route['admin/condominio/(:any)/(:num)'] = "admin/condominios/editar/$1/$2";*/

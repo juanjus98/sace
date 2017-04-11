@@ -28,13 +28,13 @@ if (!defined('BASEPATH'))
   $config['profile_id_column'] = "id_personal";
 
 //url si aún no se ha logeado
-  $config['url_logged_in'] = "login";
+  $config['url_logged_in'] = "waadmin/login";
 //$config['url_logged_in'] = "index.php/login";
 
 //url si se ha logeado correctamente
-  $config['url_login'] = "inicio";
+  $config['url_login'] = "waadmin/inicio";
 
 //url salir del sistema logout()
-  $config['url_logout'] = "login";
+  $config['url_logout'] = "waadmin/login";
 //$config['url_logout'] = "index.php/login";
 //

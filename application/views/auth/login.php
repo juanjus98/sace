@@ -40,7 +40,7 @@ $confirmation_code = array(
             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-5">
 
                     <div class="form-box" id="login-box">
-                    <div class="header bg-header-login">Accede a tu cuenta.</div>
+                    <div class="header bg-header-login">Acceder</div>
                         <form name="frm-login" id="frm-login" action="<?php echo base_url("login");?>" method="post">
                             <div class="body bg-gray">
                                 <?php echo msj();?>

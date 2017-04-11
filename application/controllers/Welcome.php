@@ -43,4 +43,39 @@ class Welcome extends CI_Controller {
         $this->template->publish();
     }
 
+    public function upload(){
+    	if($this->input->post()){
+    		$config['upload_path']          = './images/';
+	        $config['allowed_types']        = 'gif|jpg|png';
+	        $config['max_size']             = 1000;
+	        $config['max_width']            = 1024;
+	        $config['max_height']           = 1024;
+
+	        $this->load->library('upload', $config);
+
+	        /*echo "<pre>";
+	        print_r($config);
+	        echo "</pre>";
+
+	        die();*/
+
+	        if ( ! $this->upload->do_upload('userfile')){
+	            $upload_info = array('error' => $this->upload->display_errors());
+	        }
+	        else{
+	            $upload_info = array('upload_data' => $this->upload->data());
+	        }
+
+	        /*$upload_data = $upload_info['upload_data'];*/
+
+	        echo "<pre>";
+	        print_r($upload_info);
+	        echo "</pre>";
+
+		}
+
+
+    	$this->load->view('upload_form', array('error' => ' ' ));
+    }
+
 }

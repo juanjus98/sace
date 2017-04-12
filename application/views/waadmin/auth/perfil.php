@@ -106,9 +106,12 @@ echo "</pre>";*/
                     <div class="col-sm-4">
                      <?php
                      $checked_cambiar = "";
-                     if($post['ck_cambiar_pass'] == 1){
+                     if(isset($post['ck_cambiar_pass'])){
+                      $checked_cambiar = ($post['ck_cambiar_pass'] == 1) ? "checked" : "" ;
+                     /*if($post['ck_cambiar_pass'] == 1){
                       $checked_cambiar = "checked";
-                    }
+                    }*/
+                  }
                     ?>
                     <input class="form-control input-sm" id="ck_cambiar_pass" name="ck_cambiar_pass" type="checkbox" value="1" <?php echo $checked_cambiar;?> <?php echo $retVal = ($wa_tipo == 'V') ? "disabled" : "";?>> 
                     </div>
@@ -118,7 +121,7 @@ echo "</pre>";*/
                <?php
                //Mostrar/Ocultar passwords
                $style_pass = "display: none;";
-               if($post['ck_cambiar_pass']){
+               if(isset($post['ck_cambiar_pass'])){
                 $style_pass = "";
                }
                ?>
@@ -127,12 +130,12 @@ echo "</pre>";*/
                    <div class="form-group" style="margin-bottom: 0px;">
                      <label for="password" class="col-sm-2 control-label" style="text-align: right;"><span style="color: red; font-weight: bold;">*</span> Contraseña actual:</label>
                      <div class="col-sm-4">
-                       <input name="password" id="password" type="password" value="<?php echo $post['password'];?>" class="form-control input-sm">
+                       <input name="password" id="password" type="password" value="" class="form-control input-sm">
                        <?php echo form_error('password', '<div class="error">', '</div>'); ?>
                      </div>
                      <label for="new_password" class="col-sm-2 control-label" style="text-align: right;"><span style="color: red; font-weight: bold;">*</span> Nueva contraseña:</label>
                      <div class="col-sm-4">
-                       <input name="new_password" id="new_password" type="password" value="<?php echo $post['new_password'];?>" class="form-control input-sm">
+                       <input name="new_password" id="new_password" type="password" value="" class="form-control input-sm">
                        <?php echo form_error('new_password', '<div class="error">', '</div>'); ?>
                      </div>
                    </div>

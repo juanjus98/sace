@@ -66,7 +66,7 @@ $route['translate_uri_dashes'] = FALSE;
 $route['waadmin'] = "waadmin/waauth";
 $route['waadmin/login'] = "waadmin/waauth";
 $route['waadmin/salir'] = "waadmin/waauth/logout";
-$route['waadmin/perfil/(:any)'] = "waadmin/Waauth/perfil";
+$route['waadmin/perfil/(:any)'] = "waadmin/waauth/perfil";
 
 $route['waadmin/condominio/(:any)/(:num)'] = "waadmin/condominios/editar/$1/$2";
 /*$route['admin/condominio/(:any)/(:num)'] = "admin/condominios/editar/$1/$2";*/

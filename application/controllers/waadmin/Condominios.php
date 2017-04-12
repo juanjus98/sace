@@ -7,7 +7,7 @@ class Condominios extends CI_Controller{
 
 	function __construct(){
 		parent::__construct();
-		$this->template->set_layout('intranet.php');
+		$this->template->set_layout('waadmin/intranet.php');
 
 		/**
 		 * Verficamos si existe una session activa

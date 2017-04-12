@@ -79,6 +79,8 @@ class Waauth extends CI_Controller {
         $tipo = $this->uri->segment(3);
         $tipos_vista = array('V' => 'Visualizar', 'E' => 'Editar');
 
+        $data['tipo'] = $tipos_vista[$tipo];
+
         $data['wa_tipo'] = $tipo;
         $data['wa_modulo'] = $tipos_vista[$tipo];
         $data['wa_menu'] = 'Perfil de usuario';
@@ -152,7 +154,7 @@ class Waauth extends CI_Controller {
                 );
 
             $this->db->where('id_personal', $post['id_personal']);
-            $this->db->update('personal', $update_data_personal);
+            $this->db->update('wa_personal', $update_data_personal);
 
             /**
              * Actualizar contraseña

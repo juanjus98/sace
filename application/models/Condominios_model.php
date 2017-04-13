@@ -5,82 +5,65 @@ class Condominios_model extends CI_Model {
         parent::__construct();
     }
 
-    /**
-     * @param [type]
-     */
-    public function set_post($searchterm) {
-        if ($searchterm) {
-            $this->session->set_userdata('s_post', $searchterm);
-            return $searchterm;
-        } elseif ($this->session->userdata('s_post')) {
-            $searchterm = $this->session->userdata('s_post');
-            return $searchterm;
-        } else {
-            $searchterm = "";
-            return $searchterm;
+    function listado($limit, $start, $data = NULL) {
+
+        $where_array = array('t1.estado != ' => 0);
+
+        if (!empty($data['nombre_condominio'])) {
+            $where_array["t1.nombre_condominio"] = $data['nombre_condominio'];
         }
+
+        //ORDENAR POR
+        if (!empty($data['ordenar_por'])) {
+            $order_by = $data['ordenar_por'] . ' ' . $data['ordentipo'];
+        } else {
+            $order_by = 't1.id ASC';
+        }
+
+        if ($start > 0) {
+            $start = ($start - 1) * $limit;
+        }
+
+        $resultado = $this->db->select("t1.*")
+        ->where($where_array)
+        ->order_by($order_by)
+        ->limit($limit, $start)
+        ->get("wa_condominio as t1")
+        ->result_array();
+
+        return $resultado;
     }
 
-    /**
-     * Consultar pagina
-     *
-     * Trae la información de una pagina
-     *
-     * @package		Paginas
-     * @author		Juan Julio Sandoval Layza
-     * @copyright   webApu.com 
-     * @since		07-05-2014
-     * @version		Version 1.0
-     */
-    function get_website() {
-        $result = $this->db->select("t1.*")
-                ->where("t1.id =", 1)
-                ->where("t1.estado !=", 0)
-                ->get("website as t1")
-                ->row_array();
-        return $result;
+
+    function total_registros($data = NULL) {
+        $where_array = array('t1.estado != ' => 0);
+
+        if (!empty($data['nombre_condominio'])) {
+            $where_array["t1.nombre_condominio"] = $data['nombre_condominio'];
+        }
+
+        $resultado = $this->db->select("t1.*")
+        ->where($where_array)
+        ->get("wa_condominio as t1")
+        ->num_rows();
+
+        return $resultado;
     }
-    
-    /**
-     * Slider principal
-     *
-     * Trae la información del slider principal
-     *
-     * @package		Paginas
-     * @author		Juan Julio Sandoval Layza
-     * @copyright       Webapu.com
-     * @since		09-06-2015
-     * @version		Version 1.0
-     */
-    function get_slider($limit = 3) {
-        $result = $this->db->select("t1.*")
-                ->where("t1.estado !=", 0)
-                ->limit($limit)
-                ->order_by("t1.orden", "Asc")
-                ->get("slider as t1")
-                ->result_array();
-        return $result;
-    }
-    
-    /**
-     * Carousel de productos destacados
-     *
-     * Trae la productos destacados
-     *
-     * @package		Paginas
-     * @author		Juan Julio Sandoval Layza
-     * @copyright       Webapu.com
-     * @since		29-02-2016
-     * @version		Version 1.0
-     */
-    function get_productos_destacados($limit = 12) {
-        $result = $this->db->select("t1.*")
-                ->where("t1.estado !=", 0)
-                ->limit($limit)
-                ->order_by("t1.id", "asc")
-                ->get("producto as t1")
-                ->result_array();
-        return $result;
+
+
+    function get_row($data) {
+        $where = array('t1.estado != ' => 0);
+
+        if(!empty($data['id'])){
+            $where['t1.id'] = $data['id'];
+        }
+
+        $resultado = $this->db->select("t1.*")
+        ->where($where)
+        ->get("wa_condominio as t1")
+        ->row_array();
+
+        return $resultado;
     }
 
 }

@@ -10,6 +10,9 @@ $config['admin_domain'] = "localhost/waapp";
 $config['admin_url'] = "http://" . $config['admin_domain'];
 $config['admin_logo'] = $config['admin_url'] . "/images/logo-admin.png";
 
+//Direcotio de admin
+$config['admin_path'] = 'waadmin';
+
 
 /**
  * Generales para el website

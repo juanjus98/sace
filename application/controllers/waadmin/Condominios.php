@@ -31,14 +31,12 @@ class Condominios extends CI_Controller{
 		$data['wa_tipo'] = $tipo;
 		$data['wa_modulo'] = 'Ajustes';
 		$data['wa_menu'] = 'Condominio';
-		//Consultar condominio
-		$data_crud['table'] = "wa_condominio as t1";
-		$data_crud['columns'] = "t1.*";
-		$data_crud['where'] = array("t1.id_condominio" => $id, "t1.estado !=" => 0);
-		$data['condominio'] = $this->Crud->getRow($data_crud);
+
+		$data_condominio = array("id" => $id);
+		$data['condominio'] = $this->Condominios->get_row($data_condominio);
 
 		//Consultar Administrador
-		$id_condominio = $data['condominio']['id_condominio'];
+		$id_condominio = $data['condominio']['id'];
 		$data_crud['table'] = "wa_personal as t1";
 		$data_crud['columns'] = "t1.*";
 		$data_crud['where'] = array("t1.id_condominio" => $id_condominio, "t1.estado !=" => 0, "t1.id_cargo" => 1);

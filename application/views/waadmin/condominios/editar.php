@@ -10,7 +10,7 @@ $disabled = ($wa_tipo === 'V') ? "disabled" : "";
 	<div class="col-xs-12">
 		<div class="box">
 			<form class="form-horizontal" name="edit_form" id="edit_form" action="" method="post" role="form">
-				<input type="hidden" name="condominio[id_condominio]" value="<?php echo $condominio['id_condominio'];?>">
+				<input type="hidden" name="condominio[id]" value="<?php echo $condominio['id'];?>">
 				<input type="hidden" name="administrador[id_personal]" value="<?php echo $administrador['id_personal'];?>">
 				<div class="box-header">
 					<div class="row pad" style="padding-bottom: 0px;">

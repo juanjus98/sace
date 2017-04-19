@@ -632,7 +632,7 @@ function popupCenter(url, title, w, h) {
 }
 $(function() {
     "use strict";
-    console.log("Developer!");
+    console.log("Avance SACE!");
     //Submit Eliminar 
     $(document).on("click", "#btn-eliminar", function() {
         if (confirm("Realemente desea aliminar")) {
@@ -821,6 +821,272 @@ $(function() {
         $("#cont-passwords").hide();
         //$(".chk").prop("checked",false);
         /*$(".chk").iCheck('uncheck');*/
+    });
+
+// -------- Método que permite seleccionar un registro en el popup
+    $(document).on("click", ".add-register", function() {
+        var tipo_popup = $("#tipo_popup").val();
+        var data_entidad = $(this).data("entidad");
+
+        var id_entidad = data_entidad.id_entidad;
+        var nombre_entidad = data_entidad.nombre_entidad;
+
+        var num_fila = 0;
+        var html_tr = '';
+
+        var ie = 0;
+        var tipo_elemento = '';
+
+        // Validamos el tipo de popup
+        if (tipo_popup=="entity") {// Si solo vamos agregar una entidad
+            // Validamos si la entidad tiene alguna alerta
+            if (typeof data_entidad.alerta !== "undefined") {
+                alert(data_entidad.alerta);
+                return false;
+            } else {
+                var menu = $("#menu").val();
+
+                if (menu == "Contratos") {
+                    window.opener.location.href = base_url+"/contratos/anexos/"+data_entidad.id_entidad_contratos;
+                } else {
+                    $.each(data_entidad, function (key, value) {
+                        window.opener.$("#"+key).val(value);
+                    });
+                }
+            }
+
+        } else if (tipo_popup=="element_package") {// Si se van agregar varios elementos a un paquete
+            //var ie = 0;
+            window.opener.$("input[id^='id_elemento']").each(function() {
+                var id_elemento = $(this).val();
+                if (id_entidad==id_elemento) ie++;
+            });
+
+            if (ie>0) {
+                alert("No se puede agregar dos veces el mismo elemento.");
+                return false;
+            } else {
+                tipo_elemento = data_entidad.tipo_elemento;
+                var descripcion_entidad = "";
+
+                if (data_entidad.descripcion === null) {
+                    descripcion_entidad = "";
+                } else {
+                    descripcion_entidad = data_entidad.descripcion;
+                }
+
+                num_fila = window.opener.$(".table-element > tbody > tr").length;
+                num_fila = num_fila + 1;
+                var html_tr_cantidad = '';
+
+                if (tipo_elemento == 'PL') {
+                    html_tr_cantidad = '<span class="text">&nbsp;&nbsp;&nbsp;&nbsp;1</span>';
+                    html_tr_cantidad += '<input type="hidden" name="paquete_detalles[cantidad][]" id="cantidad_elemento" value="1">';
+                } else if (tipo_elemento == 'EQ') {
+                    html_tr_cantidad = '<input type="text" class="form-control input-sm only_number mandatory" name="paquete_detalles[cantidad][]" id="cantidad_elemento_'+num_fila+'" maxlength="3">';
+                }
+
+                html_tr = '<tr id="'+num_fila+'"><td style="text-align: center; vertical-align: top;">'+num_fila+'</td>';
+                html_tr += '<td style="text-align: left; vertical-align: top;">';
+                html_tr += '<span id="nombre_elemento">'+nombre_entidad+'</span>';
+                html_tr += '<input type="hidden" name="paquete_detalles[tipo_elemento][]" id="tipo_elemento_'+num_fila+'" value="'+tipo_elemento+'">';
+                html_tr += '<input type="hidden" name="paquete_detalles[id_elemento][]" id="id_elemento_'+num_fila+'" value="'+id_entidad+'">';
+                html_tr += '</td><td style="text-align: left; vertical-align: top;">';
+                html_tr += '<textarea class="form-control" name="paquete_detalles[descripcion][]" id="descripcion_elemento_'+num_fila+'" style="height: 70px;">'+descripcion_entidad+'</textarea>';
+                html_tr += '</td><td style="text-align: left; vertical-align: top;">';
+                html_tr += '<label for="cantidad_elemento" style="display: none;"><span style="color: red; font-weight: bold;">*</span> Cantidad del Elemento</label>';
+                html_tr += html_tr_cantidad+'</td><td style="text-align: center; vertical-align: top;">';
+                html_tr += '<a title="Eliminar" id="btn-delete-element" data-id-element="'+num_fila+'" title="Eliminar elemento"><i class="glyphicon glyphicon-trash"></i></a>';
+                html_tr += '</td></tr>';
+
+                window.opener.$(".table-element > tbody").append(html_tr);
+                window.opener.$("#cantidad_elemento_"+num_fila).focus();
+            }
+
+        } else if (tipo_popup=="contacts") {
+            var ic = 0;
+            if (window.opener.$("input[id='id_entidad_contactos']").val() == id_entidad) ic++;
+            window.opener.$("input[id^='id_contacto']").each(function() {
+                var id_contacto = $(this).val();
+                if (id_entidad==id_contacto) ic++;
+            });
+
+            if (ic>0) {
+                alert("No se puede agregar dos veces el mismo contacto.");
+                return false;
+            } else {
+                var telefono_entidad = data_entidad.telefono_empresa;
+                var email_entidad = data_entidad.email;
+                var cargo_entidad = "";
+
+                if (data_entidad.cargo === null) {
+                    cargo_entidad = "";
+                } else {
+                    cargo_entidad = data_entidad.cargo;
+                }
+
+                var anexo_entidad = "";
+                if (data_entidad.anexo === null) {
+                    anexo_entidad = "";
+                } else {
+                    anexo_entidad = data_entidad.anexo;
+                }
+
+                
+                num_fila = window.opener.$(".table-contact > tbody > tr").length;
+                num_fila = num_fila + 1;
+
+                html_tr = '<tr id="'+num_fila+'">';
+                html_tr += '<td style="text-align: center; vertical-align: middle;">'+num_fila+'</td>';
+                html_tr += '<td style="text-align: left; vertical-align: middle;"><span>'+nombre_entidad+'</span>';
+                html_tr += '<input type="hidden" id="id_contacto_'+num_fila+'" name="contrato_contactos[id_contacto][]" value="'+id_entidad+'"></td>';
+                html_tr += '<td style="text-align: center; vertical-align: middle;"><span>'+cargo_entidad+'</span></td>';
+                html_tr += '<td style="text-align: center; vertical-align: middle;"><span>'+telefono_entidad+'</span></td>';
+                html_tr += '<td style="text-align: center; vertical-align: middle;"><span>'+anexo_entidad+'</span></td>';
+                html_tr += '<td style="text-align: left; vertical-align: middle;"><span>'+email_entidad+'</span></td>';
+                html_tr += '<td style="text-align: center; vertical-align: middle;">';
+                html_tr += '<a title="Eliminar" id="btn-delete-element" data-id-element="'+num_fila+'" title="Eliminar elemento"><i class="glyphicon glyphicon-trash"></i></a>';
+                html_tr += '</td></tr>';
+
+                window.opener.$(".table-contact > tbody").append(html_tr);
+            }
+
+        } else if (tipo_popup=="entities") {
+            /*var ie = 0;*/
+            window.opener.$("input[id^='id_elemento']").each(function() {
+                var id_elemento = $(this).val();
+                if (id_entidad==id_elemento) ie++;
+            });
+
+            if (ie>0) {
+                alert("No se puede agregar dos veces la misma orden de servicio.");
+                return false;
+            } else {
+                tipo_elemento = data_entidad.tipo_elemento;
+                var precio = data_entidad.precio;
+
+                // Calculamos el indice del nuevo elemento
+                num_fila = window.opener.$(".table-element > tbody > tr").length;
+                num_fila = num_fila + 1;
+
+                // Estructura de la fila
+                var condicion_economica_tr = '<tr id="'+num_fila+'"><td style="text-align: center; vertical-align: middle;">'+num_fila+'</td>';
+                condicion_economica_tr += '<td style="text-align: left; vertical-align: middle;">';
+                condicion_economica_tr += '<span id="nombre_elemento">'+nombre_entidad+'</span>';
+                condicion_economica_tr += '<input type="hidden" name="orden_servicios[tipo_elemento][]" id="tipo_elemento_'+num_fila+'" value="'+tipo_elemento+'">';
+                condicion_economica_tr += '<input type="hidden" name="orden_servicios[id_elemento][]" id="id_elemento_'+num_fila+'" value="'+id_entidad+'">';
+                condicion_economica_tr += '<input type="hidden" name="orden_servicios[id_orden_servicio][]" id="id_orden_servicio">';
+                condicion_economica_tr += '<input type="hidden" name="orden_servicios[nombre_servicio][]" id="nombre_servicio" value="'+nombre_entidad+'">';
+                condicion_economica_tr += '</td><td class="chkGratuito" style="text-align: center; vertical-align: middle;">';
+                condicion_economica_tr += '<input class="form-control input-sm" type="checkbox" id="gratuito_elemento_'+num_fila+'">';
+                condicion_economica_tr += '<input type="hidden" name="orden_servicios[gratuito][]" id="gratuito_hidden_elemento_'+num_fila+'">';
+                condicion_economica_tr += '</td><td class="chkInstalacion" style="text-align: center; vertical-align: middle;">';
+
+                // Validamos el "tipo de pago de instalacion"
+                if (window.opener.$("#tipo_pago_instalacion").val() == '2') {
+                    condicion_economica_tr += '<input class="form-control input-sm" type="checkbox" id="instalacion_elemento_'+num_fila+'" disabled="disabled">';
+                } else {
+                    condicion_economica_tr += '<input class="form-control input-sm" type="checkbox" id="instalacion_elemento_'+num_fila+'">';
+                }
+
+                condicion_economica_tr += '<input type="hidden" name="orden_servicios[instalacion][]" id="instalacion_hidden_elemento_'+num_fila+'">';
+                condicion_economica_tr += '</td><td style="text-align: left; vertical-align: middle;">';
+                condicion_economica_tr += '<label for="precio_elemento_'+num_fila+'" style="display: none;">Precio Instalaci&oacute;n</label>';
+                condicion_economica_tr += '<input type="text" class="form-control input-sm only_money" name="orden_servicios[precio_instalacion][]" id="precio_elemento_'+num_fila+'" maxlength="15" disabled="disabled" style="text-align: right;">';
+                condicion_economica_tr += '</td><td style="text-align: left; vertical-align: middle;">';
+                condicion_economica_tr += '<label for="tipo_descuento_elemento_'+num_fila+'" style="display: none;">Tipo de Descuento</label>';
+                condicion_economica_tr += '<select class="form-control selectpicker" id="tipo_descuento_elemento_'+num_fila+'" name="orden_servicios[id_tipo_descuento][]" data-live-search="true" disabled="disabled">';
+                condicion_economica_tr += '<option value="">----</option>';
+                condicion_economica_tr += '<option value="1">Moneda</option>';
+                condicion_economica_tr += '<option value="2">Porcentaje</option>';
+                condicion_economica_tr += '</select></td><td style="text-align: left; vertical-align: middle;">';
+                condicion_economica_tr += '<label for="descuento_elemento_'+num_fila+'" style="display: none;">Descuento</label>';
+                condicion_economica_tr += '<input type="text" class="form-control input-sm only_money" name="orden_servicios[descuento][]" id="descuento_elemento_'+num_fila+'" maxlength="15" disabled="disabled" style="text-align: right;" >';
+                condicion_economica_tr += '</td><td style="text-align: right; vertical-align: middle;">';
+                condicion_economica_tr += '<span class="text" id="valor_elemento_'+num_fila+'">0.00&nbsp;</span>';
+                condicion_economica_tr += '</td><td style="text-align: center; vertical-align: middle;">';
+                condicion_economica_tr += '<a title="Eliminar" id="btn-delete-element" data-id-element="'+num_fila+'" title="Eliminar elemento"><i class="glyphicon glyphicon-trash"></i></a>';
+                condicion_economica_tr += '</td></tr>';
+
+                // Estructura de orden de servicio
+                var orden_servicio_table = '<table class="table table-bordered" id="'+num_fila+'" style="margin-bottom: 15px;"><thead class="thead-default"><tr>';
+                orden_servicio_table += '<th colspan="4"><i class="fa fa-list"></i>&nbsp;&nbsp;&nbsp;&nbsp;'+nombre_entidad+'</th></tr></thead><tbody><tr>';
+                orden_servicio_table += '<td colspan="4" style="vertical-align: middle;"><div class="form-group" style="margin-bottom: 0px;">';
+
+                if (precio == 'NO') {
+                    orden_servicio_table += '<label for="precio_elemento_instalacion_'+num_fila+'" class="col-sm-2 control-label" style="text-align: right;">Precio Mensual Recurrente</label><div class="col-sm-4">';
+                    orden_servicio_table += '<input type="hidden" id="precio_elemento_instalacion_'+num_fila+'" name="orden_servicios[precio_elemento][]" value="">';
+                    orden_servicio_table += '<input type="text" class="form-control input-sm only_money" disabled="disabled">';
+                } else {
+                    orden_servicio_table += '<label for="precio_elemento_instalacion_'+num_fila+'" class="col-sm-2 control-label" style="text-align: right;"><span style="color: red; font-weight: bold;">*</span> Precio Mensual Recurrente</label><div class="col-sm-4">';
+                    orden_servicio_table += '<input type="text"  class="form-control input-sm only_money mandatory" id="precio_elemento_instalacion_'+num_fila+'" name="orden_servicios[precio_elemento][]" maxlength="15" value="'+precio+'" >';
+                }
+
+                orden_servicio_table += '</div><label for="plazo_instalacion_'+num_fila+'" class="col-sm-2 control-label" style="text-align: right;">Plazo de Instalaci&oacute;n (d&iacute;as)</label><div class="col-sm-4">';
+                orden_servicio_table += '<input class="form-control input-sm only_number" id="plazo_instalacion_'+num_fila+'" name="orden_servicios[plazo_instalacion][]" type="text" maxlength="2">';
+                orden_servicio_table += '</div></div></td></tr><tr><td colspan="4" style="vertical-align: middle;">';
+                orden_servicio_table += '<div class="form-group" style="margin-bottom: 0px;">';
+                orden_servicio_table += '<label for="medio_acceso_instalacion_'+num_fila+'" class="col-sm-2 control-label" style="text-align: right;">Medio de Acceso</label>';
+                orden_servicio_table += '<div class="col-sm-4" style="text-align: left;">';
+                orden_servicio_table += '<select class="form-control selectpicker" id="medio_acceso_instalacion_'+num_fila+'" name="orden_servicios[id_medio_acceso][]" data-live-search="true">';
+                orden_servicio_table += '<option value="">----</option>';
+                orden_servicio_table += '<option value="1">Cableado</option>';
+                orden_servicio_table += '<option value="2">Fibra Óptica</option>';
+                orden_servicio_table += '</select></div>';
+
+                // Validamos campo capacidad minima garantizada
+                if (tipo_elemento == 'EQ') {
+                    orden_servicio_table += '<label for="capacidad_minima_garantizada_instalacion_'+num_fila+'" class="col-sm-2 control-label" style="text-align: right;">Capacidad M&iacute;nima Garantizada</label><div class="col-sm-4">';
+                    orden_servicio_table += '<input class="form-control input-sm" id="capacidad_minima_garantizada_instalacion_'+num_fila+'" name="orden_servicios[capacidad_minima_garantizada][]" type="text" maxlength="15">';
+                } else {
+                    orden_servicio_table += '<label for="capacidad_minima_garantizada_instalacion_'+num_fila+'" class="col-sm-2 control-label" style="text-align: right;"><span style="color: red; font-weight: bold;">*</span> Capacidad M&iacute;nima Garantizada</label><div class="col-sm-4">';
+                    orden_servicio_table += '<input class="form-control input-sm mandatory" id="capacidad_minima_garantizada_instalacion_'+num_fila+'" name="orden_servicios[capacidad_minima_garantizada][]" type="text" maxlength="15">';
+                }
+
+                orden_servicio_table += '</div></div></td></tr><tr><td colspan="4" style="vertical-align: middle;"><div class="form-group" style="margin-bottom: 0px;">';
+                orden_servicio_table += '<label for="departamento_instalacion_'+num_fila+'" class="col-sm-2 control-label" style="text-align: right;"><span style="color: red; font-weight: bold;">*</span> Departamento</label>';
+                orden_servicio_table += '<div class="col-sm-4" style="text-align: left;">';
+                orden_servicio_table += '<select class="form-control selectpicker mandatory" id="departamento_instalacion_'+num_fila+'" name="orden_servicios[departamento][]" data-live-search="true">';
+                orden_servicio_table += '<option value="">----</option>';
+                orden_servicio_table += '</select></div>';
+                orden_servicio_table += '<label for="provincia_instalacion_'+num_fila+'" class="col-sm-2 control-label" style="text-align: right;">Provincia</label>';
+                orden_servicio_table += '<div class="col-sm-4" style="text-align: left;">';
+                orden_servicio_table += '<select class="form-control selectpicker" id="provincia_instalacion_'+num_fila+'" name="orden_servicios[provincia][]" data-live-search="true">';
+                orden_servicio_table += '<option value="">----</option>';
+                orden_servicio_table += '</select></div></div></td></tr><tr><td colspan="4" style="vertical-align: middle;"><div class="form-group" style="margin-bottom: 0px;">';
+                orden_servicio_table += '<label for="distrito_instalacion_'+num_fila+'" class="col-sm-2 control-label" style="text-align: right;"><span style="color: red; font-weight: bold;">*</span> Distrito</label>';
+                orden_servicio_table += '<div class="col-sm-4" style="text-align: left;">';
+                orden_servicio_table += '<select class="form-control selectpicker mandatory" id="distrito_instalacion_'+num_fila+'" name="orden_servicios[distrito][]" data-live-search="true">';
+                orden_servicio_table += '<option value="">----</option>';
+                orden_servicio_table += '</select></div>';
+                orden_servicio_table += '<label for="centro_poblado_instalacion_'+num_fila+'" class="col-sm-2 control-label" style="text-align: right;">Localidad</label>';
+                orden_servicio_table += '<div class="col-sm-4" style="text-align: left;">';
+                orden_servicio_table += '<select class="form-control selectpicker" id="centro_poblado_instalacion_'+num_fila+'" name="orden_servicios[localidad][]" data-live-search="true">';
+                orden_servicio_table += '<option value="">----</option>';
+                orden_servicio_table += '</select></div></div></td></tr><tr>';
+                orden_servicio_table += '<td colspan="4" style="vertical-align: middle;">';
+                orden_servicio_table += '<div class="form-group" style="margin-bottom: 0px;">';
+                orden_servicio_table += '<label for="direccion_instalacion_'+num_fila+'" class="col-sm-2 control-label" style="text-align: right;"><span style="color: red; font-weight: bold;">*</span> Direcci&oacute;n</label>';
+                orden_servicio_table += '<div class="col-sm-4" style="text-align: left;">';
+                orden_servicio_table += '<textarea name="orden_servicios[direccion][]" id="direccion_instalacion_'+num_fila+'" class="form-control mandatory" style="height: 70px;" maxlength="100"></textarea>';
+                orden_servicio_table += '</div><label for="referencia_instalacion_'+num_fila+'" class="col-sm-2 control-label" style="text-align: right;">Referencia</label>';
+                orden_servicio_table += '<div class="col-sm-4" style="text-align: left;">';
+                orden_servicio_table += '<textarea name="orden_servicios[referencia][]" id="referencia_instalacion_'+num_fila+'" class="form-control" style="height: 70px;" maxlength="150"></textarea>';
+                orden_servicio_table += '</div></div></td></tr></tbody></table>';
+
+                window.opener.$(".table-element > tbody").append(condicion_economica_tr);
+                window.opener.$(".table-order-service > tbody > tr > td").append(orden_servicio_table);
+
+                window.opener.$("#precio_elemento_"+num_fila).focus();
+                window.opener.departamentos();
+                window.opener.$(".selectpicker").chosen({width: '100%', search_contains: true});
+                window.opener.$("input#instalacion_elemento_"+num_fila+", input#gratuito_elemento_"+num_fila).iCheck({
+                    checkboxClass: 'icheckbox_minimal'
+                });
+            }
+        }
+
+        window.close();
     });
 
  });

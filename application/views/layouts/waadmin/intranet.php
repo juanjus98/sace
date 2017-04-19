@@ -241,24 +241,24 @@ die();*/
 
             <!-- Main content -->
             <section class="content">
-             <?php echo @$template['body']; ?>
-         </section><!-- /.content -->
+               <?php echo @$template['body']; ?>
+           </section><!-- /.content -->
 
-     </aside><!-- /.right-side -->
- </div><!-- ./wrapper -->
+       </aside><!-- /.right-side -->
+   </div><!-- ./wrapper -->
 
 
- <script src="<?php echo base_url() ?>plugins/jquery/jquery-3.1.1.min.js"></script>
- <script type="text/javascript" src="<?php echo base_url() ?>js/bootstrap.min.js"></script>
- <!-- <script type="text/javascript" src="<?php echo base_url() ?>plugins/sticky/jquery.sticky.js"></script> -->
- <script type="text/javascript" src="<?php echo base_url('plugins/tagsinput/bootstrap-tagsinput.js') ?>"></script>
+   <script src="<?php echo base_url() ?>plugins/jquery/jquery-3.1.1.min.js"></script>
+   <script type="text/javascript" src="<?php echo base_url() ?>js/bootstrap.min.js"></script>
+   <!-- <script type="text/javascript" src="<?php echo base_url() ?>plugins/sticky/jquery.sticky.js"></script> -->
+   <script type="text/javascript" src="<?php echo base_url('plugins/tagsinput/bootstrap-tagsinput.js') ?>"></script>
 
- <script src="<?php echo base_url('plugins/js-cookie/js.cookie.js');?>"></script>
+   <script src="<?php echo base_url('plugins/js-cookie/js.cookie.js');?>"></script>
 
-<script src="<?php echo base_url('plugins/icheck/icheck.js?v=1.0.2');?>"></script>
+   <script src="<?php echo base_url('plugins/icheck/icheck.js?v=1.0.2');?>"></script>
 
- <script type="text/javascript" src="<?php echo base_url() ?>js/general.min.js"></script>
- <!-- <script type="text/javascript" src="<?php echo base_url() ?>js/app.js"></script> -->
+   <script type="text/javascript" src="<?php echo base_url() ?>js/general.min.js"></script>
+   <!-- <script type="text/javascript" src="<?php echo base_url() ?>js/app.js"></script> -->
 
 </body>
 

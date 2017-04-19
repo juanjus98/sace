@@ -119,7 +119,7 @@ echo '</pre>';*/
                      <tr>
                        <th colspan="4"><i class="fa fa-users" aria-hidden="true"></i> Propietarios
                       <span class="pull-right">
-                        <a href="#" class="btn btn-primary btn-xs" data-toggle="tooltip" data-placement="left" title="Agregar propietario">
+                        <a href="<?php echo $persona_url;?>" class="btn btn-primary btn-xs wapopup" data-width="800" data-height="600" data-toggle="tooltip" data-placement="left" title="Agregar propietario">
                           Agregar <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                         </a>
                       </span>

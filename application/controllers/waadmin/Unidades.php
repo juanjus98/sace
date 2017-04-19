@@ -91,6 +91,10 @@ class Unidades extends CI_Controller{
     	/*echo $this->base_ctr;*/
     	$data['current_url'] = base_url(uri_string());
     	$data['back_url'] = base_url($this->base_ctr . '/index');
+
+      //Url agregar personas waadmin/personas/index?popup
+      $data['persona_url'] = base_url($this->config->item('admin_path') . '/personas/index?popup');
+      
     	if(isset($id)){
     		$data['editar_url'] = base_url($this->base_ctr . '/editar/E/' . $id);
     	}

@@ -67,7 +67,7 @@ echo '</pre>';*/
                             if(!empty($listado)){
                                 foreach ($listado as $key => $item) {
                                     ?>
-                                    <tr>
+                                    <tr class="add-opener-register">
                                         <td>
                                             <input type="checkbox" name="items[]" id="eliminarchk-<?php echo $item['id'] ?>" value="<?php echo $item['id'] ?>" class="chk">
                                         </td>

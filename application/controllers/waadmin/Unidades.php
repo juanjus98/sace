@@ -2,6 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Unidades extends CI_Controller{
+  private $ctr_name;
 	private $base_ctr; //Url base del controlodor
 	private $primary_table = "wa_unidad"; //Tabla principal
 	public $base_title = "Unidades";
@@ -20,8 +21,9 @@ class Unidades extends CI_Controller{
 		$this->load->model("crud_model","Crud");
 		$this->load->model("unidades_model","Unidades");
 
-		//Base del controlador
-		$this->base_ctr = $this->config->item('admin_path') . '/unidades';
+		$this->ctr_name = $this->router->fetch_class();
+    //Base del controlador
+		$this->base_ctr = $this->config->item('admin_path') . '/' . $this->ctr_name;
 		
 		//Información del usuario que ha iniciado session
 		$this->user_info = $this->auth->user_profile();
@@ -93,7 +95,7 @@ class Unidades extends CI_Controller{
     	$data['back_url'] = base_url($this->base_ctr . '/index');
 
       //Url agregar personas waadmin/personas/index?popup
-      $data['persona_url'] = base_url($this->config->item('admin_path') . '/personas/index?popup');
+      $data['persona_url'] = base_url($this->config->item('admin_path') . '/personas/index?popup=' . $this->ctr_name);
       
     	if(isset($id)){
     		$data['editar_url'] = base_url($this->base_ctr . '/editar/E/' . $id);

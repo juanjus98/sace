@@ -339,6 +339,9 @@ table.text-center th {
   width: auto!important;
   height: auto!important;
 }
+.add-opener-register {
+  cursor: pointer;
+}
 /*#005C97 #363795*/
 /*
     Components: navbar, logo and content header

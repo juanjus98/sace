@@ -629,3 +629,8 @@ function popupCenter(url, title, w, h) {
       newWindow.focus();
   }
 }
+
+function addPropietario($data){
+  console.log(data);
+  return false;
+}

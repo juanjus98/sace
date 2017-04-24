@@ -630,6 +630,11 @@ function popupCenter(url, title, w, h) {
       newWindow.focus();
   }
 }
+
+function addPropietario($data){
+  console.log(data);
+  return false;
+}
 $(function() {
     "use strict";
     console.log("Avance SACE!");
@@ -824,7 +829,7 @@ $(function() {
     });
 
 // -------- Método que permite seleccionar un registro en el popup
-    $(document).on("click", ".add-register", function() {
+    $(document).on("click", ".add-opener-register", function() {
         var tipo_popup = $("#tipo_popup").val();
         var data_entidad = $(this).data("entidad");
 

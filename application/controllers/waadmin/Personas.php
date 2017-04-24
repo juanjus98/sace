@@ -96,7 +96,11 @@ class Personas extends CI_Controller{
     }
 
     function editar($tipo='C',$id=NULL){
-    	/*echo $this->base_ctr;*/
+      //Setear Plantilla
+      if (isset($_GET['popup'])) {
+        $this->template->set_layout('waadmin/popup.php');
+      }
+
     	$data['current_url'] = base_url(uri_string());
     	$data['back_url'] = base_url($this->base_ctr . '/index');
     	if(isset($id)){

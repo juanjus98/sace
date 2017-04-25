@@ -66,8 +66,9 @@ echo '</pre>';*/
                             <?php
                             if(!empty($listado)){
                                 foreach ($listado as $key => $item) {
+                                    $jsonInfo = json_encode($item);
                                     ?>
-                                    <tr class="add-opener-register">
+                                    <tr class="add-opener-register" data-jsoninfo='<?php echo $jsonInfo;?>'>
                                         <td>
                                             <input type="checkbox" name="items[]" id="eliminarchk-<?php echo $item['id'] ?>" value="<?php echo $item['id'] ?>" class="chk">
                                         </td>

@@ -31,6 +31,7 @@ class Personas extends CI_Controller{
     //Setear Plantilla
     if (isset($_GET['popup'])) {
       $this->template->set_layout('waadmin/popup.php');
+      $data['tipo_popup'] = $_GET['popup'];
     }
 
 		/*$data['wa_tipo'] = $tipo;*/

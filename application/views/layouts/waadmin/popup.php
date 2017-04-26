@@ -34,7 +34,7 @@ die();*/
 
   </head>
   <body class="skin-wa">
-  <input type="text" name="tipo_popup" id="tipo_popup" value="<?php echo $tipo_popup = (!empty($tipo_popup)) ? $tipo_popup : '' ;?>">
+  <input type="hidden" name="tipo_popup" id="tipo_popup" value="<?php echo $tipo_popup = (!empty($tipo_popup)) ? $tipo_popup : '' ;?>">
     <div class="wrapper row-offcanvas row-offcanvas-left">
       <!-- Right side column. Contains the navbar and content of the page -->
       <aside class="right-side strech">                

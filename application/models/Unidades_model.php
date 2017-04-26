@@ -89,11 +89,15 @@ function get_row($data) {
 function listar_personas($data) {
     $where = array('t1.estado != ' => 0);
 
+    if(!empty($data['tipo_persona'])){
+        $where['t1.tipo_persona'] = $data['tipo_persona'];
+    }
+
     if(!empty($data['id_unidad'])){
         $where['t1.id_unidad'] = $data['id_unidad'];
     }
 
-    $resultado = $this->db->select("t1.*,t2.codigo_tipo_documento, t2.nro_documento, CONCAT(t2.nombres, ' ', t2.apellidos) AS nombres_apellidos, t2.telefono1, t2.celular1")
+    $resultado = $this->db->select("t1.*,t2.codigo_tipo_documento, t2.nro_documento, t2.nombres, t2.apellidos, t2.telefono1, t2.celular1, t2.email")
     ->join("wa_persona as t2", "t2.id = t1.persona_id")
     ->where($where)
     ->get("wa_unidad_persona as t1")

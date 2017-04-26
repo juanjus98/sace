@@ -630,7 +630,41 @@ function popupCenter(url, title, w, h) {
   }
 }
 
-function addPropietario($data){
-  console.log(data);
+function addPropietario(objInfo){
+  console.log(objInfo);
+
+  var $tableLast = $(".table-propietario:last"); //Tabla origen
+  var $tableClone = $($tableLast).clone(); //Tabla Destino
+
+  //Validamos que la primera tabla contenga un registro asignado
+  var $selPropietario = $tableLast.find("input[name*='propietario[]']").val();
+  console.log($selPropietario);
+
+  if($selPropietario !== ''){
+    //Addicinar información en la tabla Destino
+    $tableClone.find('#cont-btns a.wapopup').remove();
+    $tableClone.find("input[name*='propietario[]']").val(objInfo.id);
+    $tableClone.find("select[name*='codigo_tipo_documento']").val(objInfo.codigo_tipo_documento).change();
+    $tableClone.find("input[name*='nro_documento']").val(objInfo.nro_documento);
+    $tableClone.find("input[name*='nombres']").val(objInfo.nombres);
+    $tableClone.find("input[name*='apellidos']").val(objInfo.apellidos);
+    $tableClone.find("input[name*='telefono1']").val(objInfo.telefono1);
+    $tableClone.find("input[name*='celular1']").val(objInfo.celular1);
+    $tableClone.find("input[name*='email']").val(objInfo.email);
+    
+    $tableLast.after($tableClone);
+  }else{
+    //Adicionar información en la tabla origen
+    console.log("Solo rellenar!");
+    $tableLast.find("input[name*='propietario[]']").val(objInfo.id);
+    $tableLast.find("select[name*='codigo_tipo_documento']").val(objInfo.codigo_tipo_documento).change();
+    $tableLast.find("input[name*='nro_documento']").val(objInfo.nro_documento);
+    $tableLast.find("input[name*='nombres']").val(objInfo.nombres);
+    $tableLast.find("input[name*='apellidos']").val(objInfo.apellidos);
+    $tableLast.find("input[name*='telefono1']").val(objInfo.telefono1);
+    $tableLast.find("input[name*='celular1']").val(objInfo.celular1);
+    $tableLast.find("input[name*='email']").val(objInfo.email);
+  }
+  
   return false;
 }

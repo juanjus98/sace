@@ -78,6 +78,7 @@ class Auth {
  * @access public
  */
  function logout() {
+  $this->logged_in();
    $user_info = $this->ci->session->userdata('s_user_info');
  //Insertamos datos de wa_acceso
    $data_insert = array(

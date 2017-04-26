@@ -3575,6 +3575,9 @@ fieldset[disabled] .btn-vk.active {
   font-size: 12px;
   font-weight: bold;
 }
+.table-child {
+  margin-top: 15px !important ;
+}
 /* CELULAR */
 @media (max-width: 767px) {
   .girl-cont {

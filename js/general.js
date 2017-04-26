@@ -631,8 +631,42 @@ function popupCenter(url, title, w, h) {
   }
 }
 
-function addPropietario($data){
-  console.log(data);
+function addPropietario(objInfo){
+  console.log(objInfo);
+
+  var $tableLast = $(".table-propietario:last"); //Tabla origen
+  var $tableClone = $($tableLast).clone(); //Tabla Destino
+
+  //Validamos que la primera tabla contenga un registro asignado
+  var $selPropietario = $tableLast.find("input[name*='propietario[]']").val();
+  console.log($selPropietario);
+
+  if($selPropietario !== ''){
+    //Addicinar información en la tabla Destino
+    $tableClone.find('#cont-btns a.wapopup').remove();
+    $tableClone.find("input[name*='propietario[]']").val(objInfo.id);
+    $tableClone.find("select[name*='codigo_tipo_documento']").val(objInfo.codigo_tipo_documento).change();
+    $tableClone.find("input[name*='nro_documento']").val(objInfo.nro_documento);
+    $tableClone.find("input[name*='nombres']").val(objInfo.nombres);
+    $tableClone.find("input[name*='apellidos']").val(objInfo.apellidos);
+    $tableClone.find("input[name*='telefono1']").val(objInfo.telefono1);
+    $tableClone.find("input[name*='celular1']").val(objInfo.celular1);
+    $tableClone.find("input[name*='email']").val(objInfo.email);
+    
+    $tableLast.after($tableClone);
+  }else{
+    //Adicionar información en la tabla origen
+    console.log("Solo rellenar!");
+    $tableLast.find("input[name*='propietario[]']").val(objInfo.id);
+    $tableLast.find("select[name*='codigo_tipo_documento']").val(objInfo.codigo_tipo_documento).change();
+    $tableLast.find("input[name*='nro_documento']").val(objInfo.nro_documento);
+    $tableLast.find("input[name*='nombres']").val(objInfo.nombres);
+    $tableLast.find("input[name*='apellidos']").val(objInfo.apellidos);
+    $tableLast.find("input[name*='telefono1']").val(objInfo.telefono1);
+    $tableLast.find("input[name*='celular1']").val(objInfo.celular1);
+    $tableLast.find("input[name*='email']").val(objInfo.email);
+  }
+  
   return false;
 }
 $(function() {
@@ -829,23 +863,28 @@ $(function() {
     });
 
 // -------- Método que permite seleccionar un registro en el popup
-    $(document).on("click", ".add-opener-register", function() {
-        var tipo_popup = $("#tipo_popup").val();
-        var jsonInfo = $(this).attr('data-jsoninfo');
-        console.log(jsonInfo);
-        
-        var objInfo = $.parseJSON( jsonInfo );
+$(document).on("click", ".add-opener-register", function() {
+    var tipo_popup = $("#tipo_popup").val();
+    var jsonInfo = $(this).attr('data-jsoninfo');
+    var objInfo = $.parseJSON( jsonInfo );
+    if(tipo_popup == 'propietario'){
+        window.opener.addPropietario(objInfo);
+    }
+    window.close();
+});
 
-        console.log(objInfo);
+//Eliminar una tabla
+$(document).on("click", ".remove-table", function() {
+    var $tableClass = $(this).attr('data-tableclass');
+    var $nTables = $('.' + $tableClass).length;
+    var $tableRemove = $(this).parents('table.' + $tableClass);
+    if($nTables > 1){
+        $tableRemove.slideUp("normal", function() { $(this).remove(); } );
+    }else{
+        $tableRemove.find('input').val('');
+        $tableRemove.find('select').val('').change();
+    }
+    return true;
+});
 
-        console.log("REGISTRO SELECCIONADO " + tipo_popup);
-        /*window.opener.$("#"+key).val(value);*/
-
-        
-
-        return false;
-
-        /*window.close();*/
-    });
-
- });
+});

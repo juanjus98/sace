@@ -192,20 +192,28 @@ $(function() {
     });
 
 // -------- Método que permite seleccionar un registro en el popup
-    $(document).on("click", ".add-opener-register", function() {
-        var tipo_popup = $("#tipo_popup").val();
-        var jsonInfo = $(this).attr('data-jsoninfo');
-        var objInfo = $.parseJSON( jsonInfo );
-        console.log(objInfo);
+$(document).on("click", ".add-opener-register", function() {
+    var tipo_popup = $("#tipo_popup").val();
+    var jsonInfo = $(this).attr('data-jsoninfo');
+    var objInfo = $.parseJSON( jsonInfo );
+    if(tipo_popup == 'propietario'){
+        window.opener.addPropietario(objInfo);
+    }
+    window.close();
+});
 
-        console.log("REGISTRO SELECCIONADO " + tipo_popup);
-        /*window.opener.$("#"+key).val(value);*/
+//Eliminar una tabla
+$(document).on("click", ".remove-table", function() {
+    var $tableClass = $(this).attr('data-tableclass');
+    var $nTables = $('.' + $tableClass).length;
+    var $tableRemove = $(this).parents('table.' + $tableClass);
+    if($nTables > 1){
+        $tableRemove.slideUp("normal", function() { $(this).remove(); } );
+    }else{
+        $tableRemove.find('input').val('');
+        $tableRemove.find('select').val('').change();
+    }
+    return true;
+});
 
-        
-
-        return false;
-
-        /*window.close();*/
-    });
-
- });
+});

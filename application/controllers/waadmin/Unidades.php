@@ -90,12 +90,17 @@ class Unidades extends CI_Controller{
     }
 
     function editar($tipo='C',$id=NULL){
-    	/*echo $this->base_ctr;*/
+    	//Tipos de documento
+      $data_crud_td['table'] = "wa_tipo_documento as t1";
+      $data_crud_td['columns'] = "t1.*";
+      $data_crud_td['where'] = array("t1.estado !=" => 0);
+      $data['tipos_documentos'] = $this->Crud->getRows($data_crud_td);
+
     	$data['current_url'] = base_url(uri_string());
     	$data['back_url'] = base_url($this->base_ctr . '/index');
 
       //Url agregar personas waadmin/personas/index?popup
-      $data['persona_url'] = base_url($this->config->item('admin_path') . '/personas/index?popup=' . $this->ctr_name);
+      $data['propietario_url'] = base_url($this->config->item('admin_path') . '/personas/index?popup=propietario');
       
     	if(isset($id)){
     		$data['editar_url'] = base_url($this->base_ctr . '/editar/E/' . $id);
@@ -132,16 +137,16 @@ class Unidades extends CI_Controller{
 
         $data['propietarios'] = $this->Unidades->listar_personas($data_propietarios);
 
-        //Ocupantes
+        //Moradores
         $data_ocupantes = array(
-          "t1.tipo_persona" => "O",
+          "t1.tipo_persona" => "M",
           "t1.id_unidad" => $unidad_id
         );
         $data['ocupantes'] = $this->Unidades->listar_personas($data_propietarios);
 
     	}
 
-    	//Consultar grupos
+    	//Consultar grupos (tipos de unidades)
       $data_crud['table'] = "wa_grupo as t1";
       $data_crud['columns'] = "t1.*";
       $data_crud['where'] = array("t1.id_condominio"=>1, "t1.estado !=" => 0);
@@ -157,6 +162,11 @@ class Unidades extends CI_Controller{
     	if ($this->input->post()) {
     		$post= $this->input->post();
     		$data['post'] = $post; 
+
+        echo "<pre>";
+        print_r($post);
+        echo "</pre>";
+        die();
 
     		$config = array(
     			array(

@@ -101,6 +101,7 @@ class Unidades extends CI_Controller{
 
       //Url agregar personas waadmin/personas/index?popup
       $data['propietario_url'] = base_url($this->config->item('admin_path') . '/personas/index?popup=propietario');
+      $data['morador_url'] = base_url($this->config->item('admin_path') . '/personas/index?popup=morador');
       
     	if(isset($id)){
     		$data['editar_url'] = base_url($this->base_ctr . '/editar/E/' . $id);
@@ -131,18 +132,18 @@ class Unidades extends CI_Controller{
 
         //Propietarios
         $data_propietarios = array(
-          "t1.tipo_persona" => "P",
-          "t1.id_unidad" => $unidad_id
+          "tipo_persona" => "P",
+          "unidad_id" => $unidad_id
         );
 
         $data['propietarios'] = $this->Unidades->listar_personas($data_propietarios);
 
         //Moradores
-        $data_ocupantes = array(
-          "t1.tipo_persona" => "M",
-          "t1.id_unidad" => $unidad_id
+        $data_moradores = array(
+          "tipo_persona" => "M",
+          "unidad_id" => $unidad_id
         );
-        $data['ocupantes'] = $this->Unidades->listar_personas($data_propietarios);
+        $data['moradores'] = $this->Unidades->listar_personas($data_moradores);
 
     	}
 
@@ -163,20 +164,23 @@ class Unidades extends CI_Controller{
     		$post= $this->input->post();
     		$data['post'] = $post; 
 
-        echo "<pre>";
-        print_r($post);
-        echo "</pre>";
-        die();
-
     		$config = array(
     			array(
-    				'field' => 'nombre_unidad',
-    				'label' => 'Nombre unidad',
+    				'field' => 'id_grupo',
+    				'label' => 'Tipo de Unidad',
     				'rules' => 'required',
     				'errors' => array(
     					'required' => 'Campo requerido.',
     					)
-    				)
+    				),
+          array(
+            'field' => 'nombre_unidad',
+            'label' => 'Nombre unidad',
+            'rules' => 'required',
+            'errors' => array(
+              'required' => 'Campo requerido.',
+              )
+            )
     			);
 
     		$this->form_validation->set_rules($config);
@@ -184,19 +188,28 @@ class Unidades extends CI_Controller{
 
     		if ($this->form_validation->run() == FALSE){
     			/*Error*/
-    			$data['post'] = $this->input->post();
+    			$data['post'] = $post;
+          if(!empty($post['propietario'])){
+            $data['propietarios'] = $this->Unidades->listar_personas($post['propietario'],true);
+          }
+
+          if(!empty($post['morador'])){
+            $data['moradores'] = $this->Unidades->listar_personas($post['morador'],true);
+          }
+
     		}else{
 
     			$data_form = array(
     				"id_condominio" => $post['id_condominio'],
     				"nombre_unidad" => $post['nombre_unidad'],
             "id_grupo" => $post['id_grupo'],
+            "descripcion" => $post['descripcion']
     				);
 
           		//Agregar
     			if($tipo == 'C'){
     				$this->db->insert($this->primary_table, $data_form);
-    				$producto_id = $this->db->insert_id();
+    				$unidad_id = $this->db->insert_id();
     				$this->session->set_userdata('msj_success', "Registro agregado satisfactoriamente.");
     			}
 
@@ -204,12 +217,49 @@ class Unidades extends CI_Controller{
     			if ($tipo == 'E') {
     				$this->db->where('id', $post['id']);
     				$this->db->update($this->primary_table, $data_form);
-    				$producto_id = $post['id'];
+    				$unidad_id = $post['id'];
     				$this->session->set_userdata('msj_success', "Registros actualizados satisfactoriamente.");
     			}
 
-    			redirect($this->base_ctr . '/index');
+          //Insertar Propietarios
+          $data_up = array('estado' => 0);
+          $where_up = array('tipo_persona' => 'P','unidad_id' => $unidad_id);
+          $this->db->where($where_up);
+          $this->db->update('wa_unidad_persona', $data_up);
+          $propietario = $post['propietario'];
+          if(!empty($propietario)){
+            foreach ($propietario as $key => $value) {
+              if(!empty($value)){
+                  $data_insert = array(
+                    'tipo_persona' => 'P', //P:Propietario
+                    'unidad_id' => $unidad_id,
+                    'persona_id' => $value
+                  );
+                  $this->db->insert('wa_unidad_persona', $data_insert);
+              }
+            }
+          }
 
+          //Insertar Moradores
+          $data_up = array('estado' => 0);
+          $where_up = array('tipo_persona' => 'M','unidad_id' => $unidad_id);
+          $this->db->where($where_up);
+          $this->db->update('wa_unidad_persona', $data_up);
+          $morador = $post['propietario'];
+          if(!empty($morador)){
+            foreach ($morador as $key => $value) {
+              if(!empty($value)){
+                  $data_insert = array(
+                    'tipo_persona' => 'M', //P:Propietario
+                    'unidad_id' => $unidad_id,
+                    'persona_id' => $value
+                  );
+                  $this->db->insert('wa_unidad_persona', $data_insert);
+              }
+            }
+          }
+
+    			redirect($this->base_ctr . '/index');
     		}
 
     	}

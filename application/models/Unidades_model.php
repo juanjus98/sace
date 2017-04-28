@@ -86,23 +86,34 @@ function get_row($data) {
 }
 
 //Traer información de wa_unidad_persona
-function listar_personas($data) {
+function listar_personas($data,$query_in=false) {
     $where = array('t1.estado != ' => 0);
+    if(!$query_in){
+        if(!empty($data['tipo_persona'])){
+            $where['t1.tipo_persona'] = $data['tipo_persona'];
+        }
 
-    if(!empty($data['tipo_persona'])){
-        $where['t1.tipo_persona'] = $data['tipo_persona'];
+        if(!empty($data['unidad_id'])){
+            $where['t1.unidad_id'] = $data['unidad_id'];
+        }
+
+        $resultado = $this->db->select("t2.*")
+        ->join("wa_persona as t2", "t2.id = t1.persona_id")
+        ->where($where)
+        ->get("wa_unidad_persona as t1")
+        ->result_array();
+
+        /*echo "<pre>";
+        print_r($this->db->last_query());
+        echo "</pre>";*/
+
+    }else{
+        $where_in = $data;
+        $resultado = $this->db->select("t1.*")
+        ->where_in("t1.id",$where_in)
+        ->get("wa_persona as t1")
+        ->result_array();
     }
-
-    if(!empty($data['id_unidad'])){
-        $where['t1.id_unidad'] = $data['id_unidad'];
-    }
-
-    $resultado = $this->db->select("t1.*,t2.codigo_tipo_documento, t2.nro_documento, t2.nombres, t2.apellidos, t2.telefono1, t2.celular1, t2.email")
-    ->join("wa_persona as t2", "t2.id = t1.persona_id")
-    ->where($where)
-    ->get("wa_unidad_persona as t1")
-    ->result_array();
-
     return $resultado;
 }
 

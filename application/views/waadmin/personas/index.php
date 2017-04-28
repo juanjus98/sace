@@ -4,6 +4,13 @@ print_r($listado);
 echo '</pre>';*/
 ?>
 <?php echo msj(); ?>
+<?php if(!empty($popop)){ ?>
+<div class="alert alert-info alert-dismissable">
+    <i class="fa fa-warning"></i>
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <b>Nota!</b> Clic sobre un registro para seleccionar.
+</div>
+<?php } ?>
 <div class="row">
     <div class="col-xs-12">
         <div class="box">
@@ -34,16 +41,22 @@ echo '</pre>';*/
                         </div>
 
                         <div class="col-sm-2">
-                            <a href="<?php echo $refresh_url;?>" class="btn btn-default btn-sm" title="Restablecer"><i class="fa fa-undo" aria-hidden="true"></i> Restablecer </a>
+                            <a href="<?php echo $refresh_url = (!empty($popop)) ? $refresh_url . '&' . $popop : $refresh_url;?>" class="btn btn-default btn-sm" title="Restablecer"><i class="fa fa-undo" aria-hidden="true"></i> Restablecer </a>
                         </div>
 
                         <div class="col-sm-5">
                             <div class="pull-right">
 
                                 <!-- <button class="btn btn-success btn-sm"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar </button> -->
-                                <a href="<?php echo $agregar_url;?>" class="btn btn-success btn-sm" title="Agregar"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a>
+                                <a href="<?php echo $agregar_url = (!empty($popop)) ? $agregar_url . '?' . $popop : $agregar_url ;?>" class="btn btn-success btn-sm" title="Agregar"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a>
 
+                                <?php
+                                if(empty($popop)){
+                                ?>
                                 <a href="#" class="btn btn-danger btn-sm" id="btn-eliminar" title="Eliminar"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</a>
+                                <?php
+                                }
+                                ?>
 
                             </div>
                         </div>
@@ -55,13 +68,17 @@ echo '</pre>';*/
                     <table class="table table-hover table-bordered">
                         <tbody>
                             <tr>
+                            <?php if(empty($popop)){?>
                                 <th><input type="checkbox" id="chkTodo" /></th>
+                            <?php } ?>
                                 <th>N° Documento</th>
                                 <th>Nombres y Apellidos</th>
                                 <th>Teléfono</th>
                                 <th>Celular</th>
                                 <th>E-mail</th>
+                                <?php if(empty($popop)){?>
                                 <th></th>
+                                <?php } ?>
                             </tr>
                             <?php
                             if(!empty($listado)){
@@ -69,21 +86,22 @@ echo '</pre>';*/
                                     $jsonInfo = json_encode($item);
                                     ?>
                                     <tr class="add-opener-register" data-jsoninfo='<?php echo $jsonInfo;?>'>
+                                        <?php if(empty($popop)){?>
                                         <td>
                                             <input type="checkbox" name="items[]" id="eliminarchk-<?php echo $item['id'] ?>" value="<?php echo $item['id'] ?>" class="chk">
                                         </td>
+                                        <?php } ?>
                                         <td><?php echo $item['nro_documento']; ?></td>
                                         <td><?php echo $item['nombres'] . " " . $item['apellidos']; ?></td>
                                         <td><?php echo $item['telefono1']; ?></td>
                                         <td><?php echo $item['celular1']; ?></td>
                                         <td><?php echo $item['email']; ?></td>
+                                        <?php if(empty($popop)){?>
                                         <td>
-                                            <a href="<?php echo $ver_url . $item['id']; ?>" class="btn btn-default btn-xs" data-toggle="tooltip" title="Visualizar"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                            <a href="<?php echo $ver_url . $item['id']; ?>" class="btn btn-default btn-xs" title="Visualizar"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                             <a href="<?php echo $editar_url . $item['id']; ?>" class="btn btn-default btn-xs" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-
-                                            <!-- <a class="btn btn-info btn-xs wapopup" data-width="800" data-height="500" href="<?php echo base_url(); ?>waadmin/productos_galeria/index/<?php echo $item['id']; ?>" data-toggle="tooltip" title="Galería"><span class="glyphicon glyphicon-picture" aria-hidden="true"></span></a> -->
-
                                         </td>
+                                        <?php } ?>
                                     </tr>
                                     <?php
                                 }

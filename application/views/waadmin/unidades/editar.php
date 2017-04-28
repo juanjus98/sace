@@ -1,6 +1,6 @@
 <?php
 /*echo '<pre>';
-print_r($propietarios);
+print_r(array_reverse($propietarios));
 echo '</pre>';*/
 ?>
 <div class="row">
@@ -23,9 +23,7 @@ echo '</pre>';*/
              if($wa_tipo == 'V'){
                ?>
                <a class="btn btn-success btn-sm" title="Editar registro" href="<?php echo $editar_url;?>"><i class="fa fa-pencil" aria-hidden="true"></i> Editar </a>
-
                <?php }?>
-
                <a href="<?php echo $back_url;?>" class="btn btn-default btn-sm"><i class="fa fa-undo" aria-hidden="true"></i> Cancelar </a>
              </div>
            </div> 
@@ -109,13 +107,12 @@ echo '</pre>';*/
                    </div>
                  </td>
                </tr>
-
              </tbody>
            </table>
-
            <!--Propietarios-->
            <?php
            if(!empty($propietarios)){
+            $propietarios = array_reverse($propietarios);
             $iip = 0;
             foreach ($propietarios as $key => $value) {
               $iip++;
@@ -313,6 +310,208 @@ echo '</pre>';*/
 }
 ?>
 <!--//Propietarios-->
+
+           <!--Moradores-->
+           <?php
+           if(!empty($moradores)){
+            $moradores = array_reverse($moradores);
+            $iim = 0;
+            foreach ($moradores as $key => $value) {
+              $iim++;
+              ?>
+              <table class="table table-bordered table-child table-morador">
+               <thead class="thead-default">
+                 <tr>
+                   <th colspan="9"><i class="fa fa-male" aria-hidden="true"></i> Morador
+                    <span class="pull-right" id="cont-btns">
+                      <?php
+                      if($iim == 1){
+                        ?>
+                        <a href="<?php echo $morador_url;?>" class="btn btn-primary btn-xs wapopup" data-width="800" data-height="600" title="Agregar">
+                          <i class="fa fa-plus" aria-hidden="true"></i> Agregar
+                        </a>
+                        <?php
+                      }
+                      ?>
+                      <a href="javascript:;" class="btn btn-danger btn-xs remove-table" data-width="800" data-height="600" data-tableclass="table-morador" title="Quitar">
+                        <i class="fa fa-times" aria-hidden="true"></i> Quitar
+                      </a>
+                    </span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                 <td>
+                   <div class="form-group" style="margin-bottom: 0px;">
+                    <label for="codigo_tipo_documento" class="col-sm-2 control-label" style="text-align: right;"> Tipo Documento:</label>
+                    <div class="col-sm-4">
+                    <input type="hidden" name="morador[]" value="<?php echo $value['id'];?>"> <!--ID Morador(wa_persona)-->
+                      <select name="codigo_tipo_documento" id="codigo_tipo_documento" class="form-control" disabled>
+                        <option value="">Seleccione</option>
+                        <?php
+                        if (!empty($tipos_documentos)) {
+                          foreach ($tipos_documentos as $tipo_documento) {
+                            $selected = "";
+                            if ($value['codigo_tipo_documento'] == $tipo_documento['codigo']) {
+                              $selected = "selected";
+                            }
+                            echo '<option value="' . $tipo_documento['codigo'] . '" ' . $selected . '>' . $tipo_documento['nombre_corto'] . '</option>';
+                          }
+                        }
+                        ?>
+                      </select>
+                    </div>
+
+                    <label for="nro_documento" class="col-sm-2 control-label" style="text-align: right;"> N° Documento:</label>
+                    <div class="col-sm-4">
+                     <input name="nro_documento" id="nro_documento" type="text" value="<?php echo $retVal = (!empty($value['nro_documento'])) ? $value['nro_documento'] : '';?>" class="form-control input-sm" disabled>
+                   </div>
+                 </div>
+               </td>
+             </tr>
+
+             <tr>
+               <td>
+                 <div class="form-group" style="margin-bottom: 0px;">
+                  <label for="nombres" class="col-sm-2 control-label" style="text-align: right;"> Nombres:</label>
+                  <div class="col-sm-4">
+                   <input name="nombres" id="nombres" type="text" value="<?php echo $retVal = (!empty($value['nombres'])) ? $value['nombres'] : '';?>" class="form-control input-sm" disabled>
+                 </div>
+
+                 <label for="apellidos" class="col-sm-2 control-label" style="text-align: right;"> Apellidos:</label>
+                 <div class="col-sm-4">
+                   <input name="apellidos" id="apellidos" type="text" value="<?php echo $retVal = (!empty($value['apellidos'])) ? $value['apellidos'] : '';?>" class="form-control input-sm" disabled>
+                 </div>
+               </div>
+             </td>
+           </tr>
+
+           <tr>
+             <td>
+               <div class="form-group" style="margin-bottom: 0px;">
+                <label for="telefono1" class="col-sm-2 control-label" style="text-align: right;"> Teléfono:</label>
+                <div class="col-sm-4">
+                 <input name="telefono1" id="telefono1" type="text" value="<?php echo $retVal = (!empty($value['telefono1'])) ? $value['telefono1'] : '';?>" class="form-control input-sm" disabled>
+               </div>
+
+               <label for="celular1" class="col-sm-2 control-label" style="text-align: right;"> Celular:</label>
+               <div class="col-sm-4">
+                 <input name="celular1" id="celular1" type="text" value="<?php echo $retVal = (!empty($value['celular1'])) ? $value['celular1'] : '';?>" class="form-control input-sm" disabled>
+               </div>
+             </div>
+           </td>
+         </tr>
+         <tr>
+           <td>
+             <div class="form-group" style="margin-bottom: 0px;">
+              <label for="email" class="col-sm-2 control-label" style="text-align: right;"> E-mail:</label>
+              <div class="col-sm-4">
+               <input name="email" id="email" type="text" value="<?php echo $retVal = (!empty($value['email'])) ? $value['email'] : '';?>" class="form-control input-sm" disabled>
+             </div>
+           </div>
+         </td>
+       </tr>
+     </tbody>
+   </table>
+   <?php
+ }
+}else {
+  ?>
+  <table class="table table-bordered table-child table-morador">
+   <thead class="thead-default">
+     <tr>
+       <th colspan="9"><i class="fa fa-male" aria-hidden="true"></i> Morador
+        <span class="pull-right" id="cont-btns">
+          <a href="<?php echo $morador_url;?>" class="btn btn-primary btn-xs wapopup" data-width="800" data-height="600" title="Agregar">
+            <i class="fa fa-plus" aria-hidden="true"></i> Agregar
+          </a>
+
+          <a href="javascript:;" class="btn btn-danger btn-xs remove-table" data-width="800" data-height="600" data-tableclass="table-morador" title="Quitar">
+            <i class="fa fa-times" aria-hidden="true"></i> Quitar
+          </a>
+        </span>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+     <td>
+       <div class="form-group" style="margin-bottom: 0px;">
+        <label for="codigo_tipo_documento" class="col-sm-2 control-label" style="text-align: right;"> Tipo Documento:</label>
+        <div class="col-sm-4">
+          <input type="hidden" name="morador[]" value=""> <!--ID Morador (wa_persona)-->
+          <select name="codigo_tipo_documento" id="codigo_tipo_documento" class="form-control" disabled>
+            <option value="">Seleccione</option>
+            <?php
+            if (!empty($tipos_documentos)) {
+              foreach ($tipos_documentos as $tipo_documento) {
+                $selected = "";
+                          /*if ($post['codigo_tipo_documento'] == $tipo_documento['codigo']) {
+                            $selected = "selected";
+                          }*/
+                          echo '<option value="' . $tipo_documento['codigo'] . '" ' . $selected . '>' . $tipo_documento['nombre_corto'] . '</option>';
+                        }
+                      }
+                      ?>
+                    </select>
+                  </div>
+
+                  <label for="nro_documento" class="col-sm-2 control-label" style="text-align: right;"> N° Documento:</label>
+                  <div class="col-sm-4">
+                   <input name="nro_documento" id="nro_documento" type="text" value="" class="form-control input-sm" disabled>
+                 </div>
+               </div>
+             </td>
+           </tr>
+
+           <tr>
+             <td>
+               <div class="form-group" style="margin-bottom: 0px;">
+                <label for="nombres" class="col-sm-2 control-label" style="text-align: right;"> Nombres:</label>
+                <div class="col-sm-4">
+                 <input name="nombres" id="nombres" type="text" value="" class="form-control input-sm" disabled>
+               </div>
+
+               <label for="apellidos" class="col-sm-2 control-label" style="text-align: right;"> Apellidos:</label>
+               <div class="col-sm-4">
+                 <input name="apellidos" id="apellidos" type="text" value="" class="form-control input-sm" disabled>
+               </div>
+             </div>
+           </td>
+         </tr>
+
+         <tr>
+           <td>
+             <div class="form-group" style="margin-bottom: 0px;">
+              <label for="telefono1" class="col-sm-2 control-label" style="text-align: right;"> Teléfono:</label>
+              <div class="col-sm-4">
+               <input name="telefono1" id="telefono1" type="text" value="" class="form-control input-sm" disabled>
+             </div>
+
+             <label for="celular1" class="col-sm-2 control-label" style="text-align: right;"> Celular:</label>
+             <div class="col-sm-4">
+               <input name="celular1" id="celular1" type="text" value="" class="form-control input-sm" disabled>
+             </div>
+           </div>
+         </td>
+       </tr>
+       <tr>
+         <td>
+           <div class="form-group" style="margin-bottom: 0px;">
+            <label for="email" class="col-sm-2 control-label" style="text-align: right;"> E-mail:</label>
+            <div class="col-sm-4">
+              <input name="email" id="email" type="text" value="" class="form-control input-sm" disabled>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <?php
+}
+?>
+<!--//Moradores-->
 
 </div>
 </fieldset >

@@ -124,11 +124,11 @@ class Condominios extends CI_Controller{
 				$data['administrador'] = $administrador;
 			}else{
 				//Actualizar condominio.
-				$id_condominio = $condominio['id_condominio'];
-				unset($condominio['id_condominio']);
+				$id_condominio = $condominio['id'];
+				unset($condominio['id']);
 				$data_update = array(
 					'table' => 'wa_condominio',
-					'where' => array('id_condominio' => $id_condominio),
+					'where' => array('id' => $id_condominio),
 					'columns' => $condominio
 					);
 				
@@ -145,7 +145,7 @@ class Condominios extends CI_Controller{
 				$this->Crud->updateRow($data_update_admin);
 				
 				$this->session->set_userdata('msj_success', "Registros actualizados satisfactoriamente.");
-				redirect('admin/condominio/V/' . $id_condominio);
+				redirect('waadmin/condominio/V/' . $id_condominio);
 
 			}
 

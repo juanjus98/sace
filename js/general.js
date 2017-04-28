@@ -669,6 +669,45 @@ function addPropietario(objInfo){
   
   return false;
 }
+
+function addMorador(objInfo){
+  console.log(objInfo);
+
+  var $tableLast = $(".table-morador:last"); //Tabla origen
+  var $tableClone = $($tableLast).clone(); //Tabla Destino
+
+  //Validamos que la primera tabla contenga un registro asignado
+  var $selMorador = $tableLast.find("input[name*='morador[]']").val();
+  console.log($selMorador);
+
+  if($selMorador !== ''){
+    //Addicinar información en la tabla Destino
+    $tableClone.find('#cont-btns a.wapopup').remove();
+    $tableClone.find("input[name*='morador[]']").val(objInfo.id);
+    $tableClone.find("select[name*='codigo_tipo_documento']").val(objInfo.codigo_tipo_documento).change();
+    $tableClone.find("input[name*='nro_documento']").val(objInfo.nro_documento);
+    $tableClone.find("input[name*='nombres']").val(objInfo.nombres);
+    $tableClone.find("input[name*='apellidos']").val(objInfo.apellidos);
+    $tableClone.find("input[name*='telefono1']").val(objInfo.telefono1);
+    $tableClone.find("input[name*='celular1']").val(objInfo.celular1);
+    $tableClone.find("input[name*='email']").val(objInfo.email);
+    
+    $tableLast.after($tableClone);
+  }else{
+    //Adicionar información en la tabla origen
+    console.log("Solo rellenar!");
+    $tableLast.find("input[name*='morador[]']").val(objInfo.id);
+    $tableLast.find("select[name*='codigo_tipo_documento']").val(objInfo.codigo_tipo_documento).change();
+    $tableLast.find("input[name*='nro_documento']").val(objInfo.nro_documento);
+    $tableLast.find("input[name*='nombres']").val(objInfo.nombres);
+    $tableLast.find("input[name*='apellidos']").val(objInfo.apellidos);
+    $tableLast.find("input[name*='telefono1']").val(objInfo.telefono1);
+    $tableLast.find("input[name*='celular1']").val(objInfo.celular1);
+    $tableLast.find("input[name*='email']").val(objInfo.email);
+  }
+  
+  return false;
+}
 $(function() {
     "use strict";
     console.log("Avance SACE!");
@@ -869,6 +908,9 @@ $(document).on("click", ".add-opener-register", function() {
     var objInfo = $.parseJSON( jsonInfo );
     if(tipo_popup == 'propietario'){
         window.opener.addPropietario(objInfo);
+    }
+    if(tipo_popup == 'morador'){
+        window.opener.addMorador(objInfo);
     }
     window.close();
 });

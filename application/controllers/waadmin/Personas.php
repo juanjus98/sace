@@ -28,10 +28,11 @@ class Personas extends CI_Controller{
 	}
 
 	function index(){
-    //Setear Plantilla
+    //Aactua como popup
     if (isset($_GET['popup'])) {
       $this->template->set_layout('waadmin/popup.php');
       $data['tipo_popup'] = $_GET['popup'];
+      $data['popop'] = 'popup=' . $_GET['popup'];
     }
 
 		/*$data['wa_tipo'] = $tipo;*/
@@ -97,10 +98,12 @@ class Personas extends CI_Controller{
     }
 
     function editar($tipo='C',$id=NULL){
-      //Setear Plantilla
-      if (isset($_GET['popup'])) {
-        $this->template->set_layout('waadmin/popup.php');
-      }
+      //Aactua como popup
+    if (isset($_GET['popup'])) {
+      $this->template->set_layout('waadmin/popup.php');
+      $data['tipo_popup'] = $_GET['popup'];
+      $data['popop'] = 'popup=' . $_GET['popup'];
+    }
 
     	$data['current_url'] = base_url(uri_string());
     	$data['back_url'] = base_url($this->base_ctr . '/index');
@@ -122,7 +125,7 @@ class Personas extends CI_Controller{
 
     	$data['wa_tipo'] = $tipo;
     	$data['wa_modulo'] = $data['tipo'];
-    	$data['wa_menu'] = 'Tipos de Unidad';
+    	$data['wa_menu'] = 'Persona';
 
 
     	if($tipo == 'E' || $tipo == 'V'){
@@ -214,7 +217,9 @@ class Personas extends CI_Controller{
     				$this->session->set_userdata('msj_success', "Registros actualizados satisfactoriamente.");
     			}
 
-    			redirect($this->base_ctr . '/index');
+    			//Redireccionar url
+          $url_red= (!empty($data['popop'])) ? $this->base_ctr . '/index?' . $data['popop'] : $this->base_ctr . '/index';
+          redirect($url_red);
 
     		}
 

@@ -199,6 +199,9 @@ $(document).on("click", ".add-opener-register", function() {
     if(tipo_popup == 'propietario'){
         window.opener.addPropietario(objInfo);
     }
+    if(tipo_popup == 'morador'){
+        window.opener.addMorador(objInfo);
+    }
     window.close();
 });
 

@@ -9,10 +9,6 @@ function listado($limit, $start, $data = NULL) {
 
     $where_array = array('t1.estado != ' => 0);
 
-    /*if (!empty($data['nombre_grupo'])) {
-        $where_array["t1.nombre_grupo"] = $data['nombre_grupo'];
-    }*/
-
    if (!empty($data['campo'])) {
        $like[$data['campo']] = $data['busqueda'];
    } else {

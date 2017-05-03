@@ -13,11 +13,11 @@ function listado($limit, $start, $data = NULL) {
         $where_array["t1.nombre_unidad"] = $data['nombre_unidad'];
     }
 
-//        if (!empty($data['periodo'])) {
-//            $like['t1.periodo'] = $data['periodo'];
-//        } else {
-//            $like['t1.periodo'] = "";
-//        }
+   if (!empty($data['campo'])) {
+       $like[$data['campo']] = $data['busqueda'];
+   } else {
+       $like['t1.nombre_unidad'] = "";
+   }
 
         //ORDENAR POR
     if (!empty($data['ordenar_por'])) {
@@ -30,10 +30,11 @@ function listado($limit, $start, $data = NULL) {
         $start = ($start - 1) * $limit;
     }
 
-    $resultado = $this->db->select("t1.*,t2.codigo_condominio, t2.nombre_condominio")
+    $resultado = $this->db->select("t1.*,t2.codigo_condominio, t2.nombre_condominio, t3.nombre_grupo")
     ->join("wa_condominio as t2", "t2.id = t1.id_condominio")
+    ->join("wa_grupo as t3", "t3.id = t1.id_grupo")
     ->where($where_array)
-//                ->like($like)
+    ->like($like)
     ->order_by($order_by)
     ->limit($limit, $start)
     ->get("wa_unidad as t1")
@@ -52,16 +53,17 @@ function total_registros($data = NULL) {
         $where_array["t1.nombre_unidad"] = $data['nombre_unidad'];
     }
 
-//        if (!empty($data['periodo'])) {
-//            $like['t1.periodo'] = $data['periodo'];
-//        } else {
-//            $like['t1.periodo'] = "";
-//        }
+    if (!empty($data['campo'])) {
+        $like[$data['campo']] = $data['busqueda'];
+    } else {
+        $like['t1.nombre_unidad'] = "";
+    }
 
-    $resultado = $this->db->select("t1.*,t2.codigo_condominio, t2.nombre_condominio")
+    $resultado = $this->db->select("t1.*,t2.codigo_condominio, t2.nombre_condominio, t3.nombre_grupo")
     ->join("wa_condominio as t2", "t2.id = t1.id_condominio")
+    ->join("wa_grupo as t3", "t3.id = t1.id_grupo")
     ->where($where_array)
-//                ->like($like)
+    ->like($like)
     ->get("wa_unidad as t1")
     ->num_rows();
 

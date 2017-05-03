@@ -44,7 +44,8 @@ class Unidades extends CI_Controller{
 
 		//BUSQUEDA
 		$data['campos_busqueda'] = array(
-			't1.nombre_unidad' => 'Nombre de unidad'
+			't1.nombre_unidad' => 'Nombre únidad',
+      't3.nombre_grupo' => 'Tipo únidad'
 			);
 
 		$sessionName = 's_' . $this->primary_table; //Session name
@@ -199,11 +200,14 @@ class Unidades extends CI_Controller{
 
     		}else{
 
+          $aporta_ingresos = (isset($post['aporta_ingresos'])) ? $post['aporta_ingresos'] : 0 ;
+
     			$data_form = array(
     				"id_condominio" => $post['id_condominio'],
     				"nombre_unidad" => $post['nombre_unidad'],
             "id_grupo" => $post['id_grupo'],
-            "descripcion" => $post['descripcion']
+            "descripcion" => $post['descripcion'],
+            "aporta_ingresos" => $aporta_ingresos
     				);
 
           		//Agregar

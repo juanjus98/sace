@@ -57,9 +57,9 @@ echo '</pre>';*/
                             <tr>
                                 <th><input type="checkbox" id="chkTodo" /></th>
                                 <!-- <th>Código</th> -->
-                                <!-- <th>Categoría</th> -->
+                                <th>Tipo Únidad</th>
                                 <th>Nombre unidad</th>
-                                <th>Condominio / Edificio</th>
+                                <!-- <th>Condominio / Edificio</th> -->
                                 <th></th>
                             </tr>
                             <?php
@@ -70,8 +70,9 @@ echo '</pre>';*/
                                         <td>
                                             <input type="checkbox" name="items[]" id="eliminarchk-<?php echo $item['id'] ?>" value="<?php echo $item['id'] ?>" class="chk">
                                         </td>
+                                        <td><?php echo $item['nombre_grupo']; ?></td>
                                         <td><?php echo $item['nombre_unidad']; ?></td>
-                                        <td><?php echo $item['nombre_condominio']; ?></td>
+                                        <!-- <td><?php echo $item['nombre_condominio']; ?></td> -->
                                         <td>
                                             <a href="<?php echo $ver_url . $item['id']; ?>" class="btn btn-default btn-xs" data-toggle="tooltip" title="Visualizar"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                             <a href="<?php echo $editar_url . $item['id']; ?>" class="btn btn-default btn-xs" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil" aria-hidden="true"></i></a>

@@ -107,6 +107,24 @@ echo '</pre>';*/
                    </div>
                  </td>
                </tr>
+
+               <tr>
+                   <td colspan="4" style="vertical-align: middle;">
+                     <div class="form-group" style="margin-bottom: 0px;">
+                       <label for="destacar" class="col-sm-2 control-label" style="text-align: right;">Aporta ingresos:</label>
+                       <div class="col-sm-4">
+                         <?php
+                         $checked = "";
+                         if(!empty($post['aporta_ingresos']) && $post['aporta_ingresos'] == 1){
+                          $checked = "checked";
+                        }
+                        ?>
+                        <input class="form-control input-sm" id="aporta_ingresos" name="aporta_ingresos" type="checkbox" value="1" <?php echo $checked;?> <?php echo $retVal = ($wa_tipo == 'V') ? "disabled" : "";?>> 
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+
              </tbody>
            </table>
            <!--Propietarios-->

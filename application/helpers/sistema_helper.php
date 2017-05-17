@@ -7,6 +7,9 @@ if (!function_exists('modulos_menus')) {
  function modulos_menus($segment=null) {
    $CI = & get_instance();
 
+   //Admin Directory
+   $admin_dir = $CI->config->item('admin_path') . "/";
+
    /*Consultamos wa_modulos*/
    $CI->db->select('*');
    $CI->db->where("visible",1);
@@ -39,7 +42,7 @@ if (!function_exists('modulos_menus')) {
 
        $html .= '<ul class="treeview-menu">';
        foreach ($menus as $key => $menu) {
-         $url_ruta = base_url($menu['ruta']);
+         $url_ruta = base_url($admin_dir . $menu['ruta']);
          $html .= '<li><a href="'.$url_ruta.'"><i class="fa fa-angle-double-right"></i> '.$menu['nombre_menu'].'</a></li>';
        }
 

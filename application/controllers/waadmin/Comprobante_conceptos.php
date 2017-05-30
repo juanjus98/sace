@@ -124,13 +124,19 @@ class Comprobante_conceptos extends CI_Controller{
       $data_crud['where'] = array("t1.estado !=" => 0);
       $data['condominios'] = $this->Crud->getRows($data_crud);
 
+      //Consultar series
+      $data_crud['table'] = "wa_comprobante_numeraciones as t1";
+      $data_crud['columns'] = "t1.*";
+      $data_crud['where'] = array("t1.condominio_id" => 1,"t1.estado !=" => 0);
+      $data['series'] = $this->Crud->getRows($data_crud);
+
       if ($this->input->post()) {
         $post= $this->input->post();
         $data['post'] = $post; 
 
         $config = array(
          array(
-          'field' => 'serie',
+          'field' => 'comprobante_numeraciones_id',
           'label' => 'Serie',
           'rules' => 'required',
           'errors' => array(
@@ -138,8 +144,8 @@ class Comprobante_conceptos extends CI_Controller{
            )
           ),
          array(
-          'field' => 'numeracion',
-          'label' => 'Numeración',
+          'field' => 'concepto',
+          'label' => 'Concepto',
           'rules' => 'required',
           'errors' => array(
            'required' => 'Campo requerido.',
@@ -157,9 +163,8 @@ class Comprobante_conceptos extends CI_Controller{
 
          $data_form = array(
           "condominio_id" => $post['condominio_id'],
-          "serie" => $post['serie'],
-          "numeracion" => $post['numeracion'],
-          "descripcion" => $post['descripcion'],
+          "comprobante_numeraciones_id" => $post['comprobante_numeraciones_id'],
+          "concepto" => $post['concepto']
           );
 
           		//Agregar
@@ -183,7 +188,7 @@ class Comprobante_conceptos extends CI_Controller{
 
     }
 
-    $this->template->title($data['tipo'] . ' Numeración');
+    $this->template->title($data['tipo'] . ' Concepto');
     $this->template->build($this->base_ctr.'/editar', $data);
   }
 

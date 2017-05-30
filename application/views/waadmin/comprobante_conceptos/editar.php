@@ -65,32 +65,36 @@ echo '</pre>';*/
                           </select>
                           <?php echo form_error('condominio_id', '<div class="error">', '</div>'); ?>
                         </div>
+
+                        <label for="comprobante_numeraciones_id" class="col-sm-2 control-label" style="text-align: right;"> Serie:</label>
+                         <div class="col-sm-4">
+                         <select name="comprobante_numeraciones_id" id="comprobante_numeraciones_id" class="form-control">
+                            <option value="">Seleccione</option>
+                            <?php
+                            if (!empty($series)) {
+                              foreach ($series as $serie) {
+                                $selected = "";
+                                if ($post['comprobante_numeraciones_id'] == $serie['id']) {
+                                  $selected = "selected";
+                                }
+                                echo '<option value="' . $serie['id'] . '" ' . $selected . '>' . $serie['serie'] . '</option>';
+                              }
+                            }
+                            ?>
+                          </select>
+                          <?php echo form_error('comprobante_numeraciones_id', '<div class="error">', '</div>'); ?>
+                        </div>
+
                       </div>
                     </td>
                   </tr>
-                  <tr>
-                   <td>
-                     <div class="form-group" style="margin-bottom: 0px;">
-                       <label for="serie" class="col-sm-2 control-label" style="text-align: right;"> Serie:</label>
-                       <div class="col-sm-4">
-                         <input name="serie" id="serie" type="text" value="<?php echo $retVal = (!empty($post['serie'])) ? $post['serie'] : '';?>" class="form-control input-sm">
-                         <?php echo form_error('serie', '<div class="error">', '</div>'); ?>
-                       </div>
-                       <label for="numeracion" class="col-sm-2 control-label" style="text-align: right;"> Numeración:</label>
-                       <div class="col-sm-4">
-                         <input name="numeracion" id="numeracion" type="text" value="<?php echo $retVal = (!empty($post['numeracion'])) ? $post['numeracion'] : '';?>" class="form-control input-sm">
-                         <?php echo form_error('numeracion', '<div class="error">', '</div>'); ?>
-                       </div>
-                     </div>
-                   </td>
-                 </tr>
                  <tr>
                    <td>
                      <div class="form-group" style="margin-bottom: 0px;">
-                       <label for="descripcion" class="col-sm-2 control-label" style="text-align: right;"> Descripción:</label>
-                       <div class="col-sm-4">
-                         <input name="descripcion" id="descripcion" type="text" value="<?php echo $retVal = (!empty($post['descripcion'])) ? $post['descripcion'] : '';?>" class="form-control input-sm">
-                         <?php echo form_error('descripcion', '<div class="error">', '</div>'); ?>
+                       <label for="concepto" class="col-sm-2 control-label" style="text-align: right;"> Concepto:</label>
+                       <div class="col-sm-10">
+                         <input name="concepto" id="concepto" type="text" value="<?php echo $retVal = (!empty($post['concepto'])) ? $post['concepto'] : '';?>" class="form-control input-sm">
+                         <?php echo form_error('concepto', '<div class="error">', '</div>'); ?>
                        </div>
                      </div>
                    </td>

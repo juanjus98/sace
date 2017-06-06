@@ -43,3 +43,8 @@ $config['monedas'] = array(
 		'simbolo' => "$"
 	)
 );
+
+/**
+ * Días para fecha de vencimiento
+ */
+$config['dias_vencimiento'] = 15;

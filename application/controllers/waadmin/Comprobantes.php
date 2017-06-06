@@ -12,6 +12,7 @@ class Comprobantes extends CI_Controller{
 		parent::__construct();
 		$this->template->set_layout('waadmin/intranet.php');
     $this->load->helper('waadmin');
+    $this->config->load('waconfig', TRUE);
 
 		/**
 		 * Verficamos si existe una session activa
@@ -90,7 +91,15 @@ class Comprobantes extends CI_Controller{
     }
 
     function editar($tipo='C',$id=NULL){
-    	/*echo $this->base_ctr;*/
+    	//Consultar condominios
+      $data_crud['table'] = "wa_comprobante_numeraciones as t1";
+      $data_crud['columns'] = "t1.*";
+      $data_crud['where'] = array("t1.estado !=" => 0);
+      $data['series'] = $this->Crud->getRows($data_crud);
+
+      //Monedas
+      $data["monedas"] = $this->config->item('monedas');
+
     	$data['current_url'] = base_url(uri_string());
     	$data['back_url'] = base_url($this->base_ctr . '/index');
     	if(isset($id)){
@@ -111,12 +120,20 @@ class Comprobantes extends CI_Controller{
 
     	$data['wa_tipo'] = $tipo;
     	$data['wa_modulo'] = $data['tipo'];
-    	$data['wa_menu'] = 'Tipos de Unidad';
+    	$data['wa_menu'] = 'Comprobante';
 
 
     	if($tipo == 'E' || $tipo == 'V'){
     		$data_row = array('id' => $id);
-    		$data['post'] = $this->Comprobantes->get_row($data_row);
+    		$post = $this->Comprobantes->get_row($data_row);
+        //Fecha de vencimiento
+        $post['fecha_vencimiento'] = date('Y-m-d', strtotime($post['fecha_emision']. ' + '.$this->config->item('dias_vencimiento').' days'));
+        /*echo "<pre>";
+        print_r($post);
+        echo "</pre>";*/
+        
+
+        $data['post'] = $post;
     	}
 
     	//Consultar condominios

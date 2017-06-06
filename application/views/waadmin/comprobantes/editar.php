@@ -40,30 +40,36 @@ echo '</pre>';*/
                  <table class="table table-bordered">
                    <thead class="thead-default">
                      <tr>
-                       <th colspan="4"><i class="fa fa-list"></i> Información</th>
+                       <th colspan="4"><i class="fa fa-list"></i> Comprobante</th>
                      </tr>
                    </thead>
                    <tbody>
                     <tr>
                      <td>
                        <div class="form-group" style="margin-bottom: 0px;">
-                         <label for="id_condominio" class="col-sm-3 control-label" style="text-align: right;"> Condominio/Edificio:</label>
+                         <label for="serie" class="col-sm-2 control-label" style="text-align: right;"> Serie:</label>
                          <div class="col-sm-4">
-                         <select name="id_condominio" id="id_condominio" class="form-control" readonly>
-                            <!-- <option value="">Seleccione</option> -->
+                         <select name="serie" id="serie" class="form-control">
+                            <option value="">Seleccione</option>
                             <?php
-                            if (!empty($condominios)) {
-                              foreach ($condominios as $condominio) {
+                            if (!empty($series)) {
+                              foreach ($series as $serie) {
                                 $selected = "";
-                                if ($post['id_condominio'] == $condominio['id']) {
+                                if ($post['serie'] == $serie['serie']) {
                                   $selected = "selected";
                                 }
-                                echo '<option value="' . $condominio['id'] . '" ' . $selected . '>' . $condominio['nombre_condominio'] . '</option>';
+                                echo '<option value="' . $serie['serie'] . '" ' . $selected . '>' . $serie['serie'] . '</option>';
                               }
                             }
                             ?>
                           </select>
-                          <?php echo form_error('id_condominio', '<div class="error">', '</div>'); ?>
+                          <?php echo form_error('serie', '<div class="error">', '</div>'); ?>
+                        </div>
+
+                        <label for="numero" class="col-sm-2 control-label" style="text-align: right;"> Número:</label>
+                         <div class="col-sm-4">
+                         <input name="numero" id="numero" type="text" value="<?php echo $retVal = (!empty($post['numero'])) ? $post['numero'] : '';?>" class="form-control input-sm">
+                          <?php echo form_error('numero', '<div class="error">', '</div>'); ?>
                         </div>
                       </div>
                     </td>
@@ -71,11 +77,49 @@ echo '</pre>';*/
                   <tr>
                    <td>
                      <div class="form-group" style="margin-bottom: 0px;">
-                       <label for="nombre_grupo" class="col-sm-3 control-label" style="text-align: right;"> Nombre tipo de unidad:</label>
+                       <label for="fecha_emision" class="col-sm-2 control-label" style="text-align: right;"> Emisión:</label>
                        <div class="col-sm-4">
-                         <input name="nombre_grupo" id="nombre_grupo" type="text" value="<?php echo $retVal = (!empty($post['nombre_grupo'])) ? $post['nombre_grupo'] : '';?>" class="form-control input-sm">
-                         <?php echo form_error('nombre_grupo', '<div class="error">', '</div>'); ?>
+                         <input name="fecha_emision" id="fecha_emision" type="text" value="<?php echo $retVal = (!empty($post['fecha_emision'])) ? $post['fecha_emision'] : '';?>" class="form-control input-sm">
+                         <?php echo form_error('fecha_emision', '<div class="error">', '</div>'); ?>
                        </div>
+
+                       <label for="fecha_vencimiento" class="col-sm-2 control-label" style="text-align: right;"> Vencimiento:</label>
+                       <div class="col-sm-4">
+                         <input name="fecha_vencimiento" id="fecha_vencimiento" type="text" value="<?php echo $retVal = (!empty($post['fecha_vencimiento'])) ? $post['fecha_vencimiento'] : '';?>" class="form-control input-sm">
+                         <?php echo form_error('fecha_vencimiento', '<div class="error">', '</div>'); ?>
+                       </div>
+
+                     </div>
+                   </td>
+                 </tr>
+                 <tr>
+                   <td>
+                     <div class="form-group" style="margin-bottom: 0px;">
+                       <label for="moneda" class="col-sm-2 control-label" style="text-align: right;"> Moneda:</label>
+                       <div class="col-sm-4">
+                         <select name="moneda" id="moneda" class="form-control">
+                            <option value="">Seleccione</option>
+                            <?php
+                            if (!empty($monedas)) {
+                              foreach ($monedas as $indice=>$moneda) {
+                                $selected = "";
+                                if ($post['moneda'] == $indice) {
+                                  $selected = "selected";
+                                }
+                                echo '<option value="' . $indice . '" ' . $selected . '>' . $indice . '</option>';
+                              }
+                            }
+                            ?>
+                          </select>
+                         <?php echo form_error('fecha_emision', '<div class="error">', '</div>'); ?>
+                       </div>
+
+                       <label for="total" class="col-sm-2 control-label" style="text-align: right;"> Total:</label>
+                       <div class="col-sm-4">
+                         <input name="total" id="total" type="text" value="<?php echo $retVal = (!empty($post['total'])) ? $post['total'] : '';?>" class="form-control input-sm">
+                         <?php echo form_error('total', '<div class="error">', '</div>'); ?>
+                       </div>
+
                      </div>
                    </td>
                  </tr>

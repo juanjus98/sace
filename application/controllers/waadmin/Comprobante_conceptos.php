@@ -136,14 +136,6 @@ class Comprobante_conceptos extends CI_Controller{
 
         $config = array(
          array(
-          'field' => 'comprobante_numeraciones_id',
-          'label' => 'Serie',
-          'rules' => 'required',
-          'errors' => array(
-           'required' => 'Campo requerido.',
-           )
-          ),
-         array(
           'field' => 'concepto',
           'label' => 'Concepto',
           'rules' => 'required',
@@ -154,9 +146,10 @@ class Comprobante_conceptos extends CI_Controller{
          array(
           'field' => 'importe',
           'label' => 'Importe',
-          'rules' => 'required',
+          'rules' => 'required|decimal',
           'errors' => array(
            'required' => 'Campo requerido.',
+           'decimal' => 'Ingrese un importe válido (ejm: 100.00).',
            )
           )
          );

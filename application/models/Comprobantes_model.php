@@ -30,13 +30,15 @@ function listado($limit, $start, $data = NULL) {
         $start = ($start - 1) * $limit;
     }
 
-    $resultado = $this->db->select("t1.*,t2.codigo_condominio, t2.nombre_condominio")
-    ->join("wa_condominio as t2", "t2.id = t1.id_condominio")
+    $resultado = $this->db->select("t1.*,t2.codigo_condominio, t2.nombre_condominio,t3.nombre_unidad, t4.nombre_grupo")
+    ->join("wa_condominio as t2", "t2.id = t1.condominio_id")
+    ->join("wa_unidad as t3", "t3.id = t1.unidad_id")
+    ->join("wa_grupo as t4", "t4.id = t3.grupo_id")
     ->where($where_array)
 //                ->like($like)
     ->order_by($order_by)
     ->limit($limit, $start)
-    ->get("wa_grupo as t1")
+    ->get("wa_comprobante as t1")
     ->result_array();
 
 //       echo $this->db->last_query();
@@ -58,11 +60,13 @@ function total_registros($data = NULL) {
 //            $like['t1.periodo'] = "";
 //        }
 
-    $resultado = $this->db->select("t1.*,t2.codigo_condominio, t2.nombre_condominio")
-    ->join("wa_condominio as t2", "t2.id = t1.id_condominio")
+    $resultado = $this->db->select("t1.*,t2.codigo_condominio, t2.nombre_condominio,t3.nombre_unidad, t4.nombre_grupo")
+    ->join("wa_condominio as t2", "t2.id = t1.condominio_id")
+    ->join("wa_unidad as t3", "t3.id = t1.unidad_id")
+    ->join("wa_grupo as t4", "t4.id = t3.grupo_id")
     ->where($where_array)
 //                ->like($like)
-    ->get("wa_grupo as t1")
+    ->get("wa_comprobante as t1")
     ->num_rows();
 
     return $resultado;
@@ -76,10 +80,12 @@ function get_row($data) {
         $where['t1.id'] = $data['id'];
     }
 
-    $resultado = $this->db->select("t1.*,t2.codigo_condominio, t2.nombre_condominio")
-    ->join("wa_condominio as t2", "t2.id = t1.id_condominio")
+    $resultado = $this->db->select("t1.*,t2.codigo_condominio, t2.nombre_condominio,t3.nombre_unidad, t4.nombre_grupo")
+    ->join("wa_condominio as t2", "t2.id = t1.condominio_id")
+    ->join("wa_unidad as t3", "t3.id = t1.unidad_id")
+    ->join("wa_grupo as t4", "t4.id = t3.grupo_id")
     ->where($where)
-    ->get("wa_grupo as t1")
+    ->get("wa_comprobante as t1")
     ->row_array();
 
     return $resultado;

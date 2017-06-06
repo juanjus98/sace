@@ -31,7 +31,7 @@ function listado($limit, $start, $data = NULL) {
     }
 
     $resultado = $this->db->select("t1.*,t2.codigo_condominio, t2.nombre_condominio")
-    ->join("wa_condominio as t2", "t2.id = t1.id_condominio")
+    ->join("wa_condominio as t2", "t2.id = t1.condominio_id")
     ->where($where_array)
 //                ->like($like)
     ->order_by($order_by)
@@ -59,7 +59,7 @@ function total_registros($data = NULL) {
 //        }
 
     $resultado = $this->db->select("t1.*,t2.codigo_condominio, t2.nombre_condominio")
-    ->join("wa_condominio as t2", "t2.id = t1.id_condominio")
+    ->join("wa_condominio as t2", "t2.id = t1.condominio_id")
     ->where($where_array)
 //                ->like($like)
     ->get("wa_grupo as t1")
@@ -77,7 +77,7 @@ function get_row($data) {
     }
 
     $resultado = $this->db->select("t1.*,t2.codigo_condominio, t2.nombre_condominio")
-    ->join("wa_condominio as t2", "t2.id = t1.id_condominio")
+    ->join("wa_condominio as t2", "t2.id = t1.condominio_id")
     ->where($where)
     ->get("wa_grupo as t1")
     ->row_array();

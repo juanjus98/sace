@@ -95,6 +95,29 @@ if (!function_exists('activar_link')) {
 
 }
 
+/**
+ * Setear importe
+ *
+ * Setea un importe con su respectivo simbolo de moneda
+ * 
+ * @category    Utilitarios
+ * @author      Juan Julio Sandoval Layza
+ * @since       2017-06-2017
+ * @version     Version 1.0
+ */
+if (!function_exists('setImporte')) {
+
+    function setImporte($importe,$moneda) {
+        $ci = & get_instance();
+        $ci->config->load('waconfig', TRUE);
+        $monedas = $ci->config->item('monedas');
+        $dataMoneda = $monedas[$moneda];
+        $strImporte = $dataMoneda['simbolo'] . " " .$importe;
+        return $strImporte;
+    }
+
+}
+
 
 /**
  * Mensajes

@@ -66,7 +66,7 @@ echo '</pre>';*/
                           <?php echo form_error('condominio_id', '<div class="error">', '</div>'); ?>
                         </div>
 
-                        <label for="comprobante_numeraciones_id" class="col-sm-2 control-label" style="text-align: right;"> Serie:</label>
+                        <!-- <label for="comprobante_numeraciones_id" class="col-sm-2 control-label" style="text-align: right;"> Serie:</label>
                          <div class="col-sm-4">
                          <select name="comprobante_numeraciones_id" id="comprobante_numeraciones_id" class="form-control">
                             <option value="">Seleccione</option>
@@ -83,7 +83,7 @@ echo '</pre>';*/
                             ?>
                           </select>
                           <?php echo form_error('comprobante_numeraciones_id', '<div class="error">', '</div>'); ?>
-                        </div>
+                        </div> -->
 
                       </div>
                     </td>
@@ -95,6 +95,17 @@ echo '</pre>';*/
                        <div class="col-sm-10">
                          <input name="concepto" id="concepto" type="text" value="<?php echo $retVal = (!empty($post['concepto'])) ? $post['concepto'] : '';?>" class="form-control input-sm">
                          <?php echo form_error('concepto', '<div class="error">', '</div>'); ?>
+                       </div>
+                     </div>
+                   </td>
+                 </tr>
+                 <tr>
+                   <td>
+                     <div class="form-group" style="margin-bottom: 0px;">
+                       <label for="importe" class="col-sm-2 control-label" style="text-align: right;"> Importe:</label>
+                       <div class="col-sm-4">
+                         <input name="importe" id="importe" type="text" value="<?php echo $retVal = (!empty($post['importe'])) ? $post['importe'] : '';?>" class="form-control input-sm">
+                         <?php echo form_error('importe', '<div class="error">', '</div>'); ?>
                        </div>
                      </div>
                    </td>

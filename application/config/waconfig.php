@@ -25,3 +25,21 @@ $config['website']['dominio'] = "www.webapu.com";
 $config['waemail']['dominio'] = "www.webapu.com";
 $config['waemail']['logo'] = "http://webapu.com/dev/muebleria/images/logo.png";
 $config['waemail']['color'] = "#B32944";
+
+/**
+ * Monedas
+ */
+$config['monedas'] = array(
+	'SOL' => array(
+		'unidad_monetaria'=>'SOL',
+		'denominacion' => "SOL",
+		'plural' => 'ES',
+		'simbolo' => "S/"
+	),
+	'USD' => array(
+		'unidad_monetaria'=>'USD',
+		'denominacion' => "DOLAR",
+		'plural' => 'ES',
+		'simbolo' => "$"
+	)
+);

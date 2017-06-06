@@ -150,6 +150,14 @@ class Comprobante_conceptos extends CI_Controller{
           'errors' => array(
            'required' => 'Campo requerido.',
            )
+          ),
+         array(
+          'field' => 'importe',
+          'label' => 'Importe',
+          'rules' => 'required',
+          'errors' => array(
+           'required' => 'Campo requerido.',
+           )
           )
          );
 
@@ -163,8 +171,9 @@ class Comprobante_conceptos extends CI_Controller{
 
          $data_form = array(
           "condominio_id" => $post['condominio_id'],
-          "comprobante_numeraciones_id" => $post['comprobante_numeraciones_id'],
-          "concepto" => $post['concepto']
+          /*"comprobante_numeraciones_id" => $post['comprobante_numeraciones_id'],*/
+          "concepto" => $post['concepto'],
+          "importe" => $post['importe']
           );
 
           		//Agregar

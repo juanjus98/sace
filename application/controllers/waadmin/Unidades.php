@@ -151,7 +151,7 @@ class Unidades extends CI_Controller{
     	//Consultar grupos (tipos de unidades)
       $data_crud['table'] = "wa_grupo as t1";
       $data_crud['columns'] = "t1.*";
-      $data_crud['where'] = array("t1.id_condominio"=>1, "t1.estado !=" => 0);
+      $data_crud['where'] = array("t1.condominio_id"=>1, "t1.estado !=" => 0);
       $data['grupos'] = $this->Crud->getRows($data_crud);
 
       //Consultar condominios
@@ -203,7 +203,7 @@ class Unidades extends CI_Controller{
           $aporta_ingresos = (isset($post['aporta_ingresos'])) ? $post['aporta_ingresos'] : 0 ;
 
     			$data_form = array(
-    				"id_condominio" => $post['id_condominio'],
+    				"condominio_id" => $post['id_condominio'],
     				"nombre_unidad" => $post['nombre_unidad'],
             "id_grupo" => $post['id_grupo'],
             "descripcion" => $post['descripcion'],

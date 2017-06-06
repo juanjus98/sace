@@ -3,14 +3,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Comprobantes extends CI_Controller{
 	private $base_ctr; //Url base del controlodor
-	private $primary_table = "wa_grupo"; //Tabla principal
-	public $base_title = "Tipos de Unidad";
+	private $primary_table = "wa_comprobante"; //Tabla principal
+	public $base_title = "Comprobantes";
 
 	public  $user_info;
 
 	function __construct(){
 		parent::__construct();
 		$this->template->set_layout('waadmin/intranet.php');
+    $this->load->helper('waadmin');
 
 		/**
 		 * Verficamos si existe una session activa
@@ -42,13 +43,15 @@ class Comprobantes extends CI_Controller{
 
 		//BUSQUEDA
 		$data['campos_busqueda'] = array(
-			't1.nombre_grupo' => 'Nombre tipo de unidad'
+			't1.serie' => 'Serie',
+      't1.numero' => 'Número',
+      't1.unidad_id' => 'Unidad'
 			);
 
 		$sessionName = 's_' . $this->primary_table; //Session name
 
 		//Paginacion
-		$base_url = base_url($this->base_ctr . '/index');
+		    $base_url = base_url($this->base_ctr . '/index');
         $per_page = 10; //registros por página
         $uri_segment = 4; //segmento de la url
         $num_links = 4; //número de links
@@ -76,7 +79,6 @@ class Comprobantes extends CI_Controller{
 
         $this->pagination->initialize($set_paginacion);
         $data["links"] = $this->pagination->create_links();
-
 
         if ($this->session->userdata("mensaje")) {
         	$data["mensaje"] = $this->session->userdata("mensaje");

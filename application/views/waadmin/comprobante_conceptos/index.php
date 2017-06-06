@@ -56,8 +56,8 @@ echo '</pre>';*/
                         <tbody>
                             <tr>
                                 <th><input type="checkbox" id="chkTodo" /></th>
-                                <th>Serie</th>
                                 <th>Concepto</th>
+                                <th>Importe</th>
                                 <th></th>
                             </tr>
                             <?php
@@ -68,8 +68,8 @@ echo '</pre>';*/
                                         <td>
                                             <input type="checkbox" name="items[]" id="eliminarchk-<?php echo $item['id'] ?>" value="<?php echo $item['id'] ?>" class="chk">
                                         </td>
-                                        <td><?php echo $item['serie']; ?></td>
                                         <td><?php echo $item['concepto']; ?></td>
+                                        <td><?php echo $item['importe']; ?></td>
                                         <td>
                                             <a href="<?php echo $ver_url . $item['id']; ?>" class="btn btn-default btn-xs" data-toggle="tooltip" title="Visualizar"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                             <a href="<?php echo $editar_url . $item['id']; ?>" class="btn btn-default btn-xs" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil" aria-hidden="true"></i></a>

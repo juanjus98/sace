@@ -26,8 +26,8 @@ if ($start > 0) {
     $start = ($start - 1) * $limit;
 }
 
-$resultado = $this->db->select("t1.*,t2.serie")
-->join("wa_comprobante_numeraciones as t2", "t2.id = t1.comprobante_numeraciones_id")
+$resultado = $this->db->select("t1.*")
+/*->join("wa_comprobante_numeraciones as t2", "t2.id = t1.comprobante_numeraciones_id")*/
 ->where($where_array)
 ->like($like)
 ->order_by($order_by)
@@ -50,8 +50,8 @@ function total_registros($data = NULL) {
        $like['t1.concepto'] = "";
    }
 
-   $resultado = $this->db->select("t1.*,t2.serie")
-   ->join("wa_comprobante_numeraciones as t2", "t2.id = t1.comprobante_numeraciones_id")
+   $resultado = $this->db->select("t1.*")
+   /*->join("wa_comprobante_numeraciones as t2", "t2.id = t1.comprobante_numeraciones_id")*/
    ->where($where_array)
    ->like($like)
    ->get("wa_comprobante_conceptos as t1")

@@ -56,10 +56,11 @@ echo '</pre>';*/
                         <tbody>
                             <tr>
                                 <th><input type="checkbox" id="chkTodo" /></th>
-                                <!-- <th>Código</th> -->
-                                <!-- <th>Categoría</th> -->
-                                <th>Nombre tipo de unidad</th>
-                                <th>Condominio / Edificio</th>
+                                <th>N° Comprobante</th>
+                                <th>Emisión</th>
+                                <th>Vencimiento</th>
+                                <th>Unidad</th>
+                                <th class="text-center">Importe</th>
                                 <th></th>
                             </tr>
                             <?php
@@ -70,10 +71,17 @@ echo '</pre>';*/
                                         <td>
                                             <input type="checkbox" name="items[]" id="eliminarchk-<?php echo $item['id'] ?>" value="<?php echo $item['id'] ?>" class="chk">
                                         </td>
-                                        <!-- <td><?php echo $item['codigo']; ?></td> -->
-                                        <td><?php echo $item['nombre_grupo']; ?></td>
-                                        <td><?php echo $item['nombre_condominio']; ?></td>
-                                        <td>
+                                        <td><?php echo $item['serie']."-".$item['numero']; ?></td>
+                                        <td><?php echo $item['fecha_emision']; ?></td>
+                                        <td><?php echo $item['fecha_emision']; ?></td>
+                                        <td><?php echo $item['nombre_grupo'] . " - " . $item['nombre_unidad']; ?></td>
+                                        <td class="text-right">
+                                        <?php
+                                            $total = setImporte($item['total'], $item['moneda']);
+                                            echo $total;
+                                        ?>
+                                        </td>
+                                        <td class="text-center">
                                             <a href="<?php echo $ver_url . $item['id']; ?>" class="btn btn-default btn-xs" data-toggle="tooltip" title="Visualizar"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                             <a href="<?php echo $editar_url . $item['id']; ?>" class="btn btn-default btn-xs" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 

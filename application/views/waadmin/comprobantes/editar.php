@@ -125,6 +125,31 @@ echo '</pre>';*/
                  </tr>
                </tbody>
              </table><br>
+
+             <table class="table table-bordered">
+                   <thead class="thead-default">
+                     <tr>
+                       <th colspan="4"><i class="fa fa-list"></i> Detalles
+                       <span class="pull-right">
+                        <a href="<?php echo $concepto_url;?>" class="btn btn-primary btn-xs wapopup" data-width="800" data-height="600" title="Agregar">
+                          <i class="fa fa-plus" aria-hidden="true"></i> Agregar
+                        </a>
+                    </span>
+                       </th>
+                     </tr>
+                   </thead>
+                   <thead class="thead-primary">
+                     <tr>
+                       <th>Descripción</th>
+                       <th class="text-center">Importe</th>
+                       <th></th>
+                     </tr>
+                   </thead>
+                   <tbody id="cont_detalles">
+                     <!--TR AQUÌ-->
+                   </tbody>
+             </table><br>
+
            </div>
          </fieldset >
        </div><!--end pad-->

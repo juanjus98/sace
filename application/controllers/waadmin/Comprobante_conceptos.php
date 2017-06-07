@@ -10,7 +10,10 @@ class Comprobante_conceptos extends CI_Controller{
 
 	function __construct(){
 		parent::__construct();
+
 		$this->template->set_layout('waadmin/intranet.php');
+    $this->load->helper('waadmin');
+    $this->config->load('waconfig', TRUE);
 
 		/**
 		 * Verficamos si existe una session activa
@@ -28,6 +31,13 @@ class Comprobante_conceptos extends CI_Controller{
 	}
 
 	function index(){
+    //Aactua como popup
+    if (isset($_GET['popup'])) {
+      $this->template->set_layout('waadmin/popup.php');
+      $data['tipo_popup'] = $_GET['popup'];
+      $data['popop'] = 'popup=' . $_GET['popup'];
+    }
+    
 		/*$data['wa_tipo'] = $tipo;*/
 		$data['wa_modulo'] = 'Listado';
 		$data['wa_menu'] = $this->base_title;
@@ -42,8 +52,7 @@ class Comprobante_conceptos extends CI_Controller{
 
 		//BUSQUEDA
 		$data['campos_busqueda'] = array(
-			't1.serie' => 'Serie',
-      't1.numeracion' => 'Numeración'
+      't1.concepto' => 'Concepto'
       );
 
 		$sessionName = 's_' . $this->primary_table; //Session name
@@ -130,6 +139,9 @@ class Comprobante_conceptos extends CI_Controller{
       $data_crud['where'] = array("t1.condominio_id" => 1,"t1.estado !=" => 0);
       $data['series'] = $this->Crud->getRows($data_crud);
 
+      //Monedas
+      $data["monedas"] = $this->config->item('monedas');
+
       if ($this->input->post()) {
         $post= $this->input->post();
         $data['post'] = $post; 
@@ -138,6 +150,14 @@ class Comprobante_conceptos extends CI_Controller{
          array(
           'field' => 'concepto',
           'label' => 'Concepto',
+          'rules' => 'required',
+          'errors' => array(
+           'required' => 'Campo requerido.',
+           )
+          ),
+         array(
+          'field' => 'moneda',
+          'label' => 'Moneda',
           'rules' => 'required',
           'errors' => array(
            'required' => 'Campo requerido.',

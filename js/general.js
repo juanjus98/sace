@@ -708,6 +708,20 @@ function addMorador(objInfo){
   
   return false;
 }
+
+/**
+ * Comprobante concepto
+ */
+function addComprobanteConcepto(objInfo){
+  var $tableLast = '<tr><td><input name="detalles[concepto][]" type="text" value="" class="form-control"></td><td><input name="detalles[importe][]" type="text" value="" class="form-control text-right"></td><td class="text-center"><a href="javascript:;" class="btn btn-danger btn-xs remove-tr" title="Quitar"><i class="fa fa-times" aria-hidden="true"></i> Quitar</a></td></tr>';
+  var $tableClone = $($tableLast).clone(); //Tabla Destino
+  //Addicinar información en la tabla Destino
+  $tableClone.find("input[name*='detalles[concepto][]']").val(objInfo.concepto);
+  $tableClone.find("input[name*='detalles[importe][]']").val(objInfo.importe);
+  //$tableClone.find("select[name*='codigo_tipo_documento']").val(objInfo.codigo_tipo_documento).change();
+  $("#cont_detalles").append($tableClone);
+  return false;
+}
 $(function() {
     "use strict";
     console.log("Avance SACE!");
@@ -912,6 +926,10 @@ $(document).on("click", ".add-opener-register", function() {
     if(tipo_popup == 'morador'){
         window.opener.addMorador(objInfo);
     }
+    //comprobante_conceptos
+    if(tipo_popup == 'comprobante_conceptos'){
+        window.opener.addComprobanteConcepto(objInfo);
+    }
     window.close();
 });
 
@@ -926,6 +944,13 @@ $(document).on("click", ".remove-table", function() {
         $tableRemove.find('input').val('');
         $tableRemove.find('select').val('').change();
     }
+    return true;
+});
+
+//Eliminar tr remove-tr
+$(document).on("click", ".remove-tr", function() {
+    var $tr = $(this).parents('tr');
+    $tr.slideUp("normal", function() { $(this).remove(); } );
     return true;
 });
 

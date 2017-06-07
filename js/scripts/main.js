@@ -202,6 +202,10 @@ $(document).on("click", ".add-opener-register", function() {
     if(tipo_popup == 'morador'){
         window.opener.addMorador(objInfo);
     }
+    //comprobante_conceptos
+    if(tipo_popup == 'comprobante_conceptos'){
+        window.opener.addComprobanteConcepto(objInfo);
+    }
     window.close();
 });
 
@@ -216,6 +220,13 @@ $(document).on("click", ".remove-table", function() {
         $tableRemove.find('input').val('');
         $tableRemove.find('select').val('').change();
     }
+    return true;
+});
+
+//Eliminar tr remove-tr
+$(document).on("click", ".remove-tr", function() {
+    var $tr = $(this).parents('tr');
+    $tr.slideUp("normal", function() { $(this).remove(); } );
     return true;
 });
 

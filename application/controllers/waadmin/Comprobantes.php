@@ -106,6 +106,8 @@ class Comprobantes extends CI_Controller{
     		$data['editar_url'] = base_url($this->base_ctr . '/editar/E/' . $id);
     	}
 
+      $data['concepto_url'] = base_url($this->config->item('admin_path') . '/comprobante_conceptos/index?popup=comprobante_conceptos');
+
     	switch ($tipo) {
     		case 'C':
     		$data['tipo'] = 'Agregar';
@@ -127,11 +129,7 @@ class Comprobantes extends CI_Controller{
     		$data_row = array('id' => $id);
     		$post = $this->Comprobantes->get_row($data_row);
         //Fecha de vencimiento
-        $post['fecha_vencimiento'] = date('Y-m-d', strtotime($post['fecha_emision']. ' + '.$this->config->item('dias_vencimiento').' days'));
-        /*echo "<pre>";
-        print_r($post);
-        echo "</pre>";*/
-        
+        $post['fecha_vencimiento'] = date('Y-m-d', strtotime($post['fecha_emision']. ' + '.$this->config->item('dias_vencimiento').' days'));       
 
         $data['post'] = $post;
     	}
@@ -145,6 +143,11 @@ class Comprobantes extends CI_Controller{
     	if ($this->input->post()) {
     		$post= $this->input->post();
     		$data['post'] = $post; 
+
+        echo "<pre>";
+        print_r($post);
+        echo "</pre>";
+        die();
 
     		$config = array(
     			array(

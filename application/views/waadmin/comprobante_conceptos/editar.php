@@ -102,6 +102,24 @@ echo '</pre>';*/
                  <tr>
                    <td>
                      <div class="form-group" style="margin-bottom: 0px;">
+                       <label for="moneda" class="col-sm-2 control-label" style="text-align: right;"> Moneda:</label>
+                       <div class="col-sm-4">
+                         <select name="moneda" id="moneda" class="form-control">
+                            <option value="">Seleccione</option>
+                            <?php
+                            if (!empty($monedas)) {
+                              foreach ($monedas as $indice=>$moneda) {
+                                $selected = "";
+                                if ($post['moneda'] == $indice) {
+                                  $selected = "selected";
+                                }
+                                echo '<option value="' . $indice . '" ' . $selected . '>' . $indice . '</option>';
+                              }
+                            }
+                            ?>
+                          </select>
+                         <?php echo form_error('fecha_emision', '<div class="error">', '</div>'); ?>
+                       </div>
                        <label for="importe" class="col-sm-2 control-label" style="text-align: right;"> Importe:</label>
                        <div class="col-sm-4">
                          <input name="importe" id="importe" type="text" value="<?php echo $retVal = (!empty($post['importe'])) ? $post['importe'] : '';?>" class="form-control input-sm">

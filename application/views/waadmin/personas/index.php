@@ -85,7 +85,7 @@ echo '</pre>';*/
                                 foreach ($listado as $key => $item) {
                                     $jsonInfo = json_encode($item);
                                     ?>
-                                    <tr class="add-opener-register" data-jsoninfo='<?php echo $jsonInfo;?>'>
+                                    <tr class="<?=(!empty($popop)) ? 'add-opener-register' : '' ;?>" data-jsoninfo='<?=$jsonInfo;?>'>
                                         <?php if(empty($popop)){?>
                                         <td>
                                             <input type="checkbox" name="items[]" id="eliminarchk-<?php echo $item['id'] ?>" value="<?php echo $item['id'] ?>" class="chk">
@@ -97,7 +97,7 @@ echo '</pre>';*/
                                         <td><?php echo $item['celular1']; ?></td>
                                         <td><?php echo $item['email']; ?></td>
                                         <?php if(empty($popop)){?>
-                                        <td>
+                                        <td class="text-center">
                                             <a href="<?php echo $ver_url . $item['id']; ?>" class="btn btn-default btn-xs" title="Visualizar"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                             <a href="<?php echo $editar_url . $item['id']; ?>" class="btn btn-default btn-xs" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                                         </td>

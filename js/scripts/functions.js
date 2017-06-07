@@ -707,3 +707,17 @@ function addMorador(objInfo){
   
   return false;
 }
+
+/**
+ * Comprobante concepto
+ */
+function addComprobanteConcepto(objInfo){
+  var $tableLast = '<tr><td><input name="detalles[concepto][]" type="text" value="" class="form-control"></td><td><input name="detalles[importe][]" type="text" value="" class="form-control text-right"></td><td class="text-center"><a href="javascript:;" class="btn btn-danger btn-xs remove-tr" title="Quitar"><i class="fa fa-times" aria-hidden="true"></i> Quitar</a></td></tr>';
+  var $tableClone = $($tableLast).clone(); //Tabla Destino
+  //Addicinar información en la tabla Destino
+  $tableClone.find("input[name*='detalles[concepto][]']").val(objInfo.concepto);
+  $tableClone.find("input[name*='detalles[importe][]']").val(objInfo.importe);
+  //$tableClone.find("select[name*='codigo_tipo_documento']").val(objInfo.codigo_tipo_documento).change();
+  $("#cont_detalles").append($tableClone);
+  return false;
+}

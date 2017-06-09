@@ -7,7 +7,7 @@ echo '</pre>';*/
  <div class="col-xs-12">
    <div class="box">
 
-     <form class="form-horizontal" name="edit_form" id="edit_form" action="<?php echo $current_url;?>" method="post" role="form">
+     <form class="form-horizontal" name="edit_form" id="edit_form" action="<?php echo $current_url = (!empty($popop)) ? $current_url . '?' . $popop : $current_url ;?>" method="post" role="form">
 
        <?php if($wa_tipo == 'E'){ ?> <input type="hidden" name="id" value="<?php echo $post['id'];?>"><?php }?>
 
@@ -27,7 +27,7 @@ echo '</pre>';*/
 
                <?php }?>
 
-               <a href="<?php echo $back_url;?>" class="btn btn-default btn-sm"><i class="fa fa-undo" aria-hidden="true"></i> Cancelar </a>
+               <a href="<?php echo $back_url = (!empty($popop)) ? $back_url . '?' . $popop : $back_url ;?>" class="btn btn-default btn-sm"><i class="fa fa-undo" aria-hidden="true"></i> Cancelar </a>
              </div>
            </div> 
          </div>
@@ -157,7 +157,7 @@ echo '</pre>';*/
 
                <?php }?>
 
-               <a href="<?php echo $back_url;?>" class="btn btn-default btn-sm"><i class="fa fa-undo" aria-hidden="true"></i> Cancelar </a>
+               <a href="<?php echo $back_url = (!empty($popop)) ? $back_url . '?' . $popop : $back_url ;?>" class="btn btn-default btn-sm"><i class="fa fa-undo" aria-hidden="true"></i> Cancelar </a>
              </div>
 
            </div>

@@ -98,6 +98,13 @@ class Comprobante_conceptos extends CI_Controller{
       }
 
       function editar($tipo='C',$id=NULL){
+
+        //Aactua como popup
+    if (isset($_GET['popup'])) {
+      $this->template->set_layout('waadmin/popup.php');
+      $data['tipo_popup'] = $_GET['popup'];
+      $data['popop'] = 'popup=' . $_GET['popup'];
+    }
        /*echo $this->base_ctr;*/
        $data['current_url'] = base_url(uri_string());
        $data['back_url'] = base_url($this->base_ctr . '/index');

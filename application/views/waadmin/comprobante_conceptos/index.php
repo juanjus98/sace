@@ -48,7 +48,7 @@ echo '</pre>';*/
                             <div class="pull-right">
 
                                 <!-- <button class="btn btn-success btn-sm"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar </button> -->
-                                <a href="<?php echo $agregar_url;?>" class="btn btn-success btn-sm" title="Agregar"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a>
+                                <a href="<?php echo $agregar_url = (!empty($popop)) ? $agregar_url . '?' . $popop : $agregar_url ;?>" class="btn btn-success btn-sm" title="Agregar"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a>
 
                                 <?php
                                 if(empty($popop)){

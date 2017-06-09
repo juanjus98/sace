@@ -182,7 +182,7 @@ echo '</pre>';*/
 
                <?php }?>
 
-               <a href="<?php echo $back_url;?>" class="btn btn-default btn-sm"><i class="fa fa-undo" aria-hidden="true"></i> Cancelar </a>
+               <a href="<?php echo $back_url = (!empty($popop)) ? $back_url . '?' . $popop : $back_url ;?>" class="btn btn-default btn-sm"><i class="fa fa-undo" aria-hidden="true"></i> Cancelar </a>
              </div>
 
            </div>

@@ -211,7 +211,9 @@ class Comprobante_conceptos extends CI_Controller{
           $this->session->set_userdata('msj_success', "Registros actualizados satisfactoriamente.");
         }
 
-        redirect($this->base_ctr . '/index');
+        //Redireccionar url
+        $url_red= (!empty($data['popop'])) ? $this->base_ctr . '/index?' . $data['popop'] : $this->base_ctr . '/index';
+        redirect($url_red);
 
       }
 

@@ -1,6 +1,80 @@
 $(function() {
     "use strict";
-    console.log("Avance SACE!");
+    console.log("TIENE QUE SALIR EL SACE! " + moment());
+
+    //Date range
+    $('.input-dateRange').daterangepicker({
+        showDropdowns: true,
+        minDate: moment().subtract(29, 'days'),
+        maxDate: moment().add(15,'days'),
+        locale: {
+        "format": "DD/MM/YYYY",
+        "separator": " - ",
+        "applyLabel": "Aplicar",
+        "cancelLabel": "Cancelar",
+        "fromLabel": "De",
+        "toLabel": "A",
+        "customRangeLabel": "Custom",
+        "daysOfWeek": [
+            "Do",
+            "Lu",
+            "Ma",
+            "Mi",
+            "Ju",
+            "Vi",
+            "Sa"
+        ],
+        "monthNames": [
+            "Enero",
+            "Febrero",
+            "Marzo",
+            "Abril",
+            "Mayo",
+            "Junio",
+            "Julio",
+            "Augosto",
+            "Setiembre",
+            "Octubre",
+            "Noviembre",
+            "Diciembre"
+        ],
+        "firstDay": 1
+    }});
+
+    //Date
+    $('.input-date').daterangepicker({
+        singleDatePicker: true,
+        showDropdowns: true,
+        minDate: moment().subtract(1, 'month'),
+        maxDate: moment().add(1,'month'),
+        locale: {
+        "format": "DD/MM/YYYY",
+        "daysOfWeek": [
+            "Do",
+            "Lu",
+            "Ma",
+            "Mi",
+            "Ju",
+            "Vi",
+            "Sa"
+        ],
+        "monthNames": [
+            "Enero",
+            "Febrero",
+            "Marzo",
+            "Abril",
+            "Mayo",
+            "Junio",
+            "Julio",
+            "Augosto",
+            "Setiembre",
+            "Octubre",
+            "Noviembre",
+            "Diciembre"
+        ],
+        "firstDay": 1
+    }});
+
     //Submit Eliminar 
     $(document).on("click", "#btn-eliminar", function() {
         if (confirm("Realemente desea aliminar")) {

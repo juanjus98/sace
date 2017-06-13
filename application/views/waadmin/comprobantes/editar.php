@@ -68,7 +68,7 @@ echo '</pre>';*/
 
                         <label for="numero" class="col-sm-2 control-label" style="text-align: right;"> Número:</label>
                          <div class="col-sm-4">
-                         <input name="numero" id="numero" type="text" value="<?php echo $retVal = (!empty($post['numero'])) ? $post['numero'] : '';?>" class="form-control input-sm">
+                         <input name="numero" id="numero" type="text" value="<?php echo $retVal = (!empty($post['numero'])) ? $post['numero'] : '';?>" placeholder="Autogenerado" class="form-control input-sm" disabled>
                           <?php echo form_error('numero', '<div class="error">', '</div>'); ?>
                         </div>
                       </div>
@@ -79,13 +79,13 @@ echo '</pre>';*/
                      <div class="form-group" style="margin-bottom: 0px;">
                        <label for="fecha_emision" class="col-sm-2 control-label" style="text-align: right;"> Emisión:</label>
                        <div class="col-sm-4">
-                         <input name="fecha_emision" id="fecha_emision" type="text" value="<?php echo $retVal = (!empty($post['fecha_emision'])) ? $post['fecha_emision'] : '';?>" class="form-control input-sm">
+                         <input name="fecha_emision" id="fecha_emision" type="text" value="<?php echo $retVal = (!empty($post['fecha_emision'])) ? fecha_es($post['fecha_emision'],'d/m/a') : '';?>" class="form-control input-sm input-date">
                          <?php echo form_error('fecha_emision', '<div class="error">', '</div>'); ?>
                        </div>
 
                        <label for="fecha_vencimiento" class="col-sm-2 control-label" style="text-align: right;"> Vencimiento:</label>
                        <div class="col-sm-4">
-                         <input name="fecha_vencimiento" id="fecha_vencimiento" type="text" value="<?php echo $retVal = (!empty($post['fecha_vencimiento'])) ? $post['fecha_vencimiento'] : '';?>" class="form-control input-sm">
+                         <input name="fecha_vencimiento" id="fecha_vencimiento" type="text" value="<?php echo $retVal = (!empty($post['fecha_vencimiento'])) ? fecha_es($post['fecha_vencimiento'],'d/m/a') : '';?>" class="form-control input-sm input-date">
                          <?php echo form_error('fecha_vencimiento', '<div class="error">', '</div>'); ?>
                        </div>
 

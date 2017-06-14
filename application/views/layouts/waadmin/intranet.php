@@ -24,6 +24,9 @@ die();*/
     <!--Daterange-->
     <link href="<?php echo base_url('css/daterangepicker/daterangepicker.css') ?>" rel="stylesheet" type="text/css" />
 
+    <!--Chosen-->
+    <link rel="stylesheet" href="<?php echo base_url('plugins/chosen/chosen.min.css') ?>" type="text/css">
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -32,7 +35,7 @@ die();*/
     <![endif]-->
 
     <link rel="shortcut icon" href="<?php echo base_url() ?>favicon.ico">
-    <script type="text/javascript">var base_url='<?php echo base_url();?>';</script>
+    <script type="text/javascript">var base_url='<?php echo base_url($this->config->item('admin_path') . "/");?>';</script>
     <?php //echo notify();?>
 
 </head>
@@ -261,7 +264,7 @@ die();*/
    <script src="<?php echo base_url('plugins/icheck/icheck.js?v=1.0.2');?>" type="text/javascript"></script>
    <script src="<?php echo base_url('plugins/moment/moment.js');?>" type="text/javascript"></script>
    <script src="<?php echo base_url('plugins/daterangepicker/daterangepicker.js');?>" type="text/javascript"></script>
-
+   <script src="<?php echo base_url('plugins/chosen/chosen.jquery.min.js');?>" type="text/javascript"></script>
 
    <script type="text/javascript" src="<?php echo base_url() ?>js/general.min.js"></script>
    <!-- <script type="text/javascript" src="<?php echo base_url() ?>js/app.js"></script> -->

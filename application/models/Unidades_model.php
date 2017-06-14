@@ -88,6 +88,28 @@ function get_row($data) {
     return $resultado;
 }
 
+function listarTodo($data = NULL) {
+
+    $where_array = array('t1.estado != ' => 0);
+
+    //ORDENAR POR
+    if (!empty($data['ordenar_por'])) {
+        $order_by = $data['ordenar_por'] . ' ' . $data['ordentipo'];
+    } else {
+        $order_by = 't1.nombre_unidad ASC';
+    }
+
+    $resultado = $this->db->select("t1.*,t2.codigo_condominio, t2.nombre_condominio, t3.nombre_grupo")
+    ->join("wa_condominio as t2", "t2.id = t1.condominio_id")
+    ->join("wa_grupo as t3", "t3.id = t1.grupo_id")
+    ->where($where_array)
+    ->order_by($order_by)
+    ->get("wa_unidad as t1")
+    ->result_array();
+
+    return $resultado;
+}
+
 //Traer información de wa_unidad_persona
 function listar_personas($data,$query_in=false) {
     $where = array('t1.estado != ' => 0);

@@ -2,6 +2,12 @@ $(function() {
     "use strict";
     console.log("TIENE QUE SALIR EL SACE! " + moment());
 
+    //Chosen
+    $(".chosen-select").chosen({
+        //disable_search_threshold: 10,
+        no_results_text: "Sin resultados."
+    });
+
     //Date range
     $('.input-dateRange').daterangepicker({
         showDropdowns: true,

@@ -21,6 +21,7 @@ class Comprobantes extends CI_Controller{
 
 		$this->load->model("crud_model","Crud");
 		$this->load->model("comprobantes_model","Comprobantes");
+    $this->load->model("unidades_model","Unidades");
 
 		//Base del controlador
 		$this->base_ctr = $this->config->item('admin_path') . '/comprobantes';
@@ -99,6 +100,9 @@ class Comprobantes extends CI_Controller{
 
       //Monedas
       $data["monedas"] = $this->config->item('monedas');
+
+      //Unidades
+      $data['unidades'] = $this->Unidades->listarTodo();
 
     	$data['current_url'] = base_url(uri_string());
     	$data['back_url'] = base_url($this->base_ctr . '/index');

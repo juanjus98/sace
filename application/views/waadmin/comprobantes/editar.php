@@ -123,6 +123,34 @@ echo '</pre>';*/
                      </div>
                    </td>
                  </tr>
+                 <tr>
+                   <td>
+                     <div class="form-group" style="margin-bottom: 0px;">
+                       <label for="moneda" class="col-sm-2 control-label"> Unidad:</label>
+                       <div class="col-sm-4">
+                         <select name="unidades_id" id="unidades_id" data-placeholder="Seleccionar Unidad" class="form-control chosen-select">
+                          <option value=""></option>
+                          <?php
+                          if(!empty($unidades)){
+                            $selected = ($post['unidades_id'] == $value['id']) ? 'selected' : '' ;
+                            foreach ($unidades as $key => $value) {
+                              echo '<option value="'.$value['id'].'" '.$selected.'>'.$value['nombre_unidad'].'</option>';
+                            }
+                          }
+                          ?>
+                         </select>
+                         <?php echo form_error('unidades_id', '<div class="error">', '</div>'); ?>
+                       </div>
+
+                       <label for="total" class="col-sm-2 control-label" style="text-align: right;"> Total:</label>
+                       <div class="col-sm-4">
+                         <input name="total" id="total" type="text" value="<?php echo $retVal = (!empty($post['total'])) ? $post['total'] : '';?>" class="form-control input-sm">
+                         <?php echo form_error('total', '<div class="error">', '</div>'); ?>
+                       </div>
+
+                     </div>
+                   </td>
+                 </tr>
                </tbody>
              </table><br>
 
